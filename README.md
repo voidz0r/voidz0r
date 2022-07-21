@@ -39,7 +39,7 @@ Right now I'm a Security Engineer @ DHL
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=voidz0r&show_icons=true&theme=radical&count_private=true)
 
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=voidz0r)](https://github.com/anuraghazra/github-readme-stats)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=voidz0r&count_private=true)](https://github.com/anuraghazra/github-readme-stats)
 
 
 
