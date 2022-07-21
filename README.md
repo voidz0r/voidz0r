@@ -36,6 +36,8 @@ Since 2018, I got my OSCP certification.
 
 Right now I'm a Security Engineer @ DHL 
 
+![Snake animation](https://github.com/madushadhanushka/github-readme/blob/output/github-contribution-snake.svg)
+
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=voidz0r&show_icons=true&theme=radical&count_private=true)
 
 
