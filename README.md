@@ -1,4 +1,4 @@
-### Hi there 👋
+### Hi👋
 
 I’m a penetration tester and repented developer. I love to break things and I easily get excited whenever a shell pops up. As part of my development madness, I’m quite familiar with:
 
@@ -36,4 +36,11 @@ Since 2018, I got my OSCP certification.
 
 Right now I'm a Security Engineer @ DHL 
 
-[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=voidz0r)](https://github.com/anuraghazra/github-readme-stats)
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=voidz0r&show_icons=true&theme=radical)
+
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=voidz0r&repo=github-readme-stats)](https://github.com/anuraghazra/github-readme-stats)
+
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=voidz0r)](https://github.com/anuraghazra/github-readme-stats)
+
+
+
