@@ -36,6 +36,10 @@ Since 2018, I got my OSCP certification.
 
 Right now I'm a Security Engineer @ DHL 
 
+<a href="https://www.linkedin.com/in/voidde/" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+
+<img src="https://img.shields.io/twitter/follow/voidz0r?logo=twitter&style=for-the-badge" alt="voidz0r" />
+
 ![Snake animation](https://github.com/madushadhanushka/github-readme/blob/output/github-contribution-snake.svg)
 
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=voidz0r&show_icons=true&theme=radical&count_private=true)
