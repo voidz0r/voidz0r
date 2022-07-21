@@ -38,7 +38,7 @@ Right now I'm a Security Engineer @ DHL
 
 <a href="https://www.linkedin.com/in/voidde/" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
 
-<img src="https://img.shields.io/twitter/follow/voidz0r?logo=twitter&style=for-the-badge" alt="voidz0r" />
+<a href="https://twitter.com/voidz0r"><img src="https://img.shields.io/twitter/follow/voidz0r?logo=twitter&style=for-the-badge" alt="voidz0r" /></a>
 
 ![Snake animation](https://github.com/madushadhanushka/github-readme/blob/output/github-contribution-snake.svg)
 
