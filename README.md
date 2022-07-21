@@ -1,6 +1,6 @@
 ### Hi👋
 
-I’m a penetration tester and repented developer. I love to break things and I easily get excited whenever a shell pops up. As part of my development madness, I’m quite familiar with:
+My name is Cristian and I’m a penetration tester and repented developer. I love to break things and I easily get excited whenever a shell pops up. As part of my development madness, I’m quite familiar with:
 
 - PHP
 - Python
@@ -18,7 +18,7 @@ As for the infosec part of my job, I’m used to deal with:
 - Social engineering
 - Reverse engineering
 - Red teaming
-- 
+
 In the spare time I like to do CTF challenges and play games, mostly FPS, MMORPG, Survivals and Simulation. Most of the time I enjoy playing:
 
 - Call of Duty 4: Modern Warfare - My parents are still hearing the screams whenever a nade hit me in the face.
