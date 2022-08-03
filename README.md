@@ -1,6 +1,6 @@
 ### Hi👋
 
-My name is Cristian and I’m a penetration tester and repented developer. I love to break things and I easily get excited whenever a shell pops up. As part of my development madness, I’m quite familiar with:
+My name is Cristian and I’m a security engineer/researcher and developer. I love to break things and I easily get excited whenever a shell pops up. As part of my development madness, I’m quite familiar with:
 
 - PHP
 - Python
