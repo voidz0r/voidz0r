@@ -2,7 +2,6 @@
 title: "Matrix Synapse 1.12.3 - SSRF and Cache poisoning"
 slug: "matrix-synapse-ssrf-cache-poisoning"
 date: 2020-01-14
-draft: true
 ---
 
 ## tl;dr
