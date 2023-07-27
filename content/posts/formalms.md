@@ -1,5 +1,6 @@
 ---
 title: "CVE-2023-4136 - FormaLMS The evil default value that leads to Authentication Bypass"
+slug: "cve-2023-4136-formalms-authentication-bypss"
 date: 2021-11-02
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: "CVE-2022-29885 Apache Tomcat Cluster Service DoS"
+slug: "cve-2022-29885-apache-tomcat-cluster-service-dos"
 date: 2022-07-13
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: "Facebook chat / dashboard content injection"
+slug: "facebook-chat-dashboard-content-injection"
 date: 2018-01-03
 ---
 

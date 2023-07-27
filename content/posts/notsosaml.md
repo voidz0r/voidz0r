@@ -1,5 +1,6 @@
 ---
 title: "SA-CONTRIB-2021-036 - NotSoSAML - Privilege escalation via XML Signature Wrapping on Miniorange Drupal plugin"
+slug: "sa-contrib-2021-036-notsosaml-miniorange-privilege-escalation-via-xml-signature-wrapping"
 date: 2021-07-09
 ---
 
