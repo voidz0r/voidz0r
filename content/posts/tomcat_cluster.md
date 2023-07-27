@@ -280,7 +280,7 @@ While the Apache Tomcat Security team is aware of this issue, their "FIX" is jus
 
 [Link to the official fix](https://github.com/apache/tomcat/commit/0fa7721f11d565a2cd2e44366c388ad6a3e6357d?ref=voidzone.me)
 
-Moral of the story: don't open that door port on untrusted networks.
+Moral of the story: don't open that ~~~door~~~ port on untrusted networks.
 ![don't open that port](/tomcatcluster/image-63.png)
 
 
