@@ -1,4 +1,4 @@
-baseURL = "http://localhost/"
+baseURL = "https://voidzone.me/"
 title = "Voidzone"
 author = "Cristian 'void' Giustini"
 copyright = "Copyright © 2023, Cristian 'void'; all rights reserved."
