@@ -277,7 +277,8 @@ It simply takes more time to fill the heap until it is full. In my tests, I trie
 ## Further info & Remediation
 While the Apache Tomcat Security team is aware of this issue, their "FIX" is just an update on the documentation that advise to not open the cluster port on untrusted networks.
 
-![official fix](https://github.com/apache/tomcat/commit/0fa7721f11d565a2cd2e44366c388ad6a3e6357d?ref=voidzone.me)
+
+[Link to the official fix](https://github.com/apache/tomcat/commit/0fa7721f11d565a2cd2e44366c388ad6a3e6357d?ref=voidzone.me)
 
 Moral of the story: don't open that door port on untrusted networks.
 ![don't open that port](/tomcatcluster/image-63.png)
