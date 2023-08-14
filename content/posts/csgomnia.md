@@ -106,7 +106,7 @@ The risks, like what could have happened to myself, is a total account compromis
 ## Remediation advices
 
 The vulnerability is caused by a lack of encryption for the QR code. Since a user could easily generate one of them, it's possible for an attacker to forge the them and attempt a phishing attack against uncaught users.
-Unfortunately there is no particular way to mitigate this issue in a QR-based authentication scenario. The general advice would be to avoid the mechanism completely and simply rely on user-password/OTP flow.
+Unfortunately there is no particular way to mitigate this issue in a QR-based authentication scenario. The general advice would be to avoid the mechanism completely and simply rely on user-password/OTP flow or, in alternative, to implement two types of QR codes, public and private, that will be validated on the server side. But this requires a bit of effort and a planned re-enginerization of the mechanism.
 Fortunately enough, Steam actually checks if the requester comes from unusual and unseen locations. Trusted locations are mainly based on previous successful login attempts and e-mail verifications.
 
 In short, never scan any QR code from a website different than the Steam one.
