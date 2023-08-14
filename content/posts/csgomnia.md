@@ -3,9 +3,7 @@ title: "A phishing attempt on Steam that became a Qrljacking research"
 slug: "a-phishing-attempt-on-steam-that-became-qrljacking"
 date: 2023-08-11T13:59:55+02:00
 weight: 1
-header:
-  image: "headers/voidzone.png"
-  caption: "Voidzone - A phishing attempt on Steam that became a Qrljacking research"
+images: ["headers/voidzone.png"]
 ---
 
 # Preface
