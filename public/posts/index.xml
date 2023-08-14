@@ -7,7 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Copyright © 2023, Cristian &#39;void&#39;; all rights reserved.</copyright>
-    <lastBuildDate>Sun, 05 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://voidzone.me/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 11 Aug 2023 13:59:55 +0200</lastBuildDate><atom:link href="https://voidzone.me/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A phishing attempt on Steam that became a Qrljacking research</title>
+      <link>https://voidzone.me/posts/a-phishing-attempt-on-steam-that-became-qrljacking/</link>
+      <pubDate>Fri, 11 Aug 2023 13:59:55 +0200</pubDate>
+      
+      <guid>https://voidzone.me/posts/a-phishing-attempt-on-steam-that-became-qrljacking/</guid>
+      <description>Preface This is a brief story about a phishing attempt made by a user that turned out into a little research.
+The initial contact The first contact I had was with a profile named Abigail🌻 who sent me a friend invite on steam.
+After a few minutes I received a message from the user, asking for a vote on a specific CS:GO AK-47 skin. Unfortunately I didn&amp;rsquo;t take screenshot of the conversation because I got blocked and the messages are gone.</description>
+    </item>
+    
     <item>
       <title>CVE-2022-44268 - Proof Of Concept of the ImageMagick Arbitrary File Read vulnerability</title>
       <link>https://voidzone.me/posts/cve-2022-44268-imagemagick-arbitrary-file-read/</link>

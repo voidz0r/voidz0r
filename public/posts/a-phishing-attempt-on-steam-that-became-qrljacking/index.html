@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>A phishing attempt on Steam that became a Qrljacking research - Voidzone</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  <meta name="description" content="Preface This is a brief story about a phishing attempt made by a user that turned out into a little research.
+The initial contact The first contact I had was with a profile named Abigail🌻 who sent me a friend invite on steam.
+After a few minutes I received a message from the user, asking for a vote on a specific CS:GO AK-47 skin. Unfortunately I didn&rsquo;t take screenshot of the conversation because I got blocked and the messages are gone." />
+  <meta name="author" content="Cristian &#39;void&#39; Giustini" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://voidzone.me/main.min.css" />
+
+  
+  <script
+    defer
+    src="https://voidzone.me/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+   
+  <link rel="preload" as="image" href="https://voidzone.me/theme.png" />
+
+  
+  
+  
+  <link rel="preload" as="image" href="https://www.gravatar.com/avatar/d4f904f245c1fd17d7f8fc7b662b7076?s=160&amp;d=identicon" />
+  
+  
+
+  
+  <link rel="preload" as="image" href="https://voidzone.me/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/github.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/linkedin.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/mastodon.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/steam.svg" />
+  
+  
+
+  
+  
+
+  
+  <link rel="icon" href="https://voidzone.me/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://voidzone.me/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.115.4">
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="A phishing attempt on Steam that became a Qrljacking research" />
+<meta property="og:description" content="Preface This is a brief story about a phishing attempt made by a user that turned out into a little research.
+The initial contact The first contact I had was with a profile named Abigail🌻 who sent me a friend invite on steam.
+After a few minutes I received a message from the user, asking for a vote on a specific CS:GO AK-47 skin. Unfortunately I didn&rsquo;t take screenshot of the conversation because I got blocked and the messages are gone." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://voidzone.me/posts/a-phishing-attempt-on-steam-that-became-qrljacking/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-11T13:59:55+02:00" />
+<meta property="article:modified_time" content="2023-08-11T13:59:55+02:00" />
+
+  
+  <meta itemprop="name" content="A phishing attempt on Steam that became a Qrljacking research">
+<meta itemprop="description" content="Preface This is a brief story about a phishing attempt made by a user that turned out into a little research.
+The initial contact The first contact I had was with a profile named Abigail🌻 who sent me a friend invite on steam.
+After a few minutes I received a message from the user, asking for a vote on a specific CS:GO AK-47 skin. Unfortunately I didn&rsquo;t take screenshot of the conversation because I got blocked and the messages are gone."><meta itemprop="datePublished" content="2023-08-11T13:59:55+02:00" />
+<meta itemprop="dateModified" content="2023-08-11T13:59:55+02:00" />
+<meta itemprop="wordCount" content="950">
+<meta itemprop="keywords" content="" />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="A phishing attempt on Steam that became a Qrljacking research"/>
+<meta name="twitter:description" content="Preface This is a brief story about a phishing attempt made by a user that turned out into a little research.
+The initial contact The first contact I had was with a profile named Abigail🌻 who sent me a friend invite on steam.
+After a few minutes I received a message from the user, asking for a vote on a specific CS:GO AK-47 skin. Unfortunately I didn&rsquo;t take screenshot of the conversation because I got blocked and the messages are gone."/>
+
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://voidzone.me/"
+      >Voidzone</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/voidz0r"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/voidz0r"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/voidde"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./mastodon.svg)"
+        href="https://infosec.exchange/@voidde"
+        target="_blank"
+        rel="me"
+      >
+        mastodon
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./steam.svg)"
+        href="https://steamcommunity.com/id/retvoid"
+        target="_blank"
+        rel="me"
+      >
+        steam
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">A phishing attempt on Steam that became a Qrljacking research</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Aug 11, 2023</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h1 id="preface">Preface</h1>
+<p>This is a brief story about a phishing attempt made by a user that turned out into a little research.</p>
+<h1 id="the-initial-contact">The initial contact</h1>
+<p>The first contact I had was with a profile named Abigail🌻 who sent me a friend invite on steam.</p>
+<p><img src="/csgomnia/friend_request.png" alt="First contact with the user"></p>
+<p>After a few minutes I received a message from the user, asking for a vote on a specific CS:GO AK-47 skin. Unfortunately I didn&rsquo;t take screenshot of the conversation because I got blocked and the messages are gone.</p>
+<p>The user asked to visit a specific website called <code>csgomnia</code> at <code>https:[/][/]twitch[.]csgomnia[.]tv[/]</code>, which presented the following page:</p>
+<p><img src="/csgomnia/the_website.png" alt="The website"></p>
+<h1 id="the-website">The website</h1>
+<p>At a first sight the login process is more than legit:</p>
+<p><img src="/csgomnia/login_window.png" alt="The login window"></p>
+<p>From the above:</p>
+<ul>
+<li>The domain is correct</li>
+<li>SSL Certificate is trusted</li>
+<li>The page is correct</li>
+<li>The links on the page point on the <code>steamcommunity.com</code> website</li>
+<li>The look and feel is identical to the original</li>
+<li>There are no typos, glitches or spacing issues whatsoever.</li>
+</ul>
+<p>An uncaught eye could just blindly trust the website right? ..Right?</p>
+<p><img src="/csgomnia/chrome_console.png" alt="Chrome Console"></p>
+<p>With some astonishment, I&rsquo;ve notice that every block of the website is carefully built using CSS/images. Including the header bar, the minimize/maximize/close buttons etc. A very well done job. But what happens if someone inserts a correct login/password?</p>
+<p>Right after the login, I noticed that the form always returns a &ldquo;wrong username/password&rdquo; combination, so the website cannot verify if credentials are valid. Speaking with &ldquo;abigail&rdquo;, she/he said &ldquo;It happened to me as well. Use the QR code instead?&rdquo;.</p>
+<p>After making sure that I had OTP in place I&rsquo;ve inserted my credentials and this happened:</p>
+<p><img src="/csgomnia/login_attempt.png" alt="Login attempt"></p>
+<p>Obviously I changed the password afterwards</p>
+<h1 id="the-qr-code">The QR code</h1>
+<p>While the login/password combination is just plain old phishing technique that uses Javascript to build the popup, the QR code in the phishing page is actually pretty interesting since it uses some sort of QR generation URL from steam.</p>
+<p>Differently from the official steam platform that generates a QR code every N seconds, the phishing page isn&rsquo;t able to do the same thing but, apparently, uses some sort of QRChallengeURL that is sent over HTTP on the <code>/ccelhsuqeiaycnvnk</code> endpoint of the <code>samiphonepack[dot]com</code> domain.</p>
+<p><img src="/csgomnia/qrcode_logics.png" alt="QR Code Challenge URL"></p>
+<h1 id="digging-into-the-qr-code-logics">Digging into the QR code logics</h1>
+<p>A deeper analysis on the QR code authentication flow showed some interesting aspects. The QR code itself isn&rsquo;t either encoded nor encrypted, but contains the same URL showed in the screenshot above like <code>https://s.team/q/1/8037143460412323909</code></p>
+<p>The URL points to a steam page and nothing happens if the URL is visited, though the URL is used in the authentication workflow. The first request hits the <code>/IAuthenticationService/BeginAuthSessionViaQR/v1</code> on the <code>api.steampowered.com</code> host.</p>
+<p><img src="/csgomnia/auth_first_request.png" alt="first request of the auth workflow"></p>
+<p>While the response is in Protobuf format, it is somehow difficult to reconstruct the object without a schema. There is a project called <code>blackboxprotobuf</code> from NCC group which supposedly converts every protobuf encoded message into a list-like structure, but I had no luck trying to decode/re-encode the requests I had. So I decided to go manually.</p>
+<p>So until now we know that the response is protobuf encoded and that will be used in the next requests. Right after generating this string, the website sends several requests to the <code>/IAuthenticationService/PollAuthSessionStatus/v1</code> endpoint to check if the user actually scanned the QR code with the Steam Mobile App (Steam Guard).</p>
+<p><img src="/csgomnia/auth_second_request.png" alt="Second request"></p>
+<p>By comparing the bytes of the first and the second request, we can see some patterns:</p>
+<p><img src="/csgomnia/auth_request_compare_1.png" alt="First request">
+<img src="/csgomnia/auth_request_compare_2.png" alt="Second request"></p>
+<p>Subsequentially the application regenerates a new QR whenever the old one has expired.</p>
+<h2 id="dissecting-the-qr-code-authentication-workflow">Dissecting the QR code authentication workflow</h2>
+<p>By now we know that:</p>
+<ul>
+<li>The QR code is in clear-text format and contains an URL</li>
+<li>The <code>/IAuthenticationService/BeginAuthSessionViaQR/v1</code> endpoint initiates the auth process. The returned object is constructed as:
+<ul>
+<li>First 11 or 12 bytes of the response. The size of it depends on some unknown factors.</li>
+<li>From 12th or 13th byte onwards the QR code URL. The URL changes at regular intervals and it&rsquo;s returned by the <code>/IAuthenticationService/PollAuthSessionStatus/v1</code> endpoint</li>
+<li>17 bytes from the 53rd position is the last part of what it looks like a signature.</li>
+<li>The rest of the code is ignored</li>
+</ul>
+</li>
+<li>Once the user approves the QR code, a JWT token is returned from the previous URL</li>
+<li>The JWT token is then sent to the <code>https://login.steampowered.com/jwt/finalizelogin</code> along with:
+<ul>
+<li>The sessionid, which is set as a cookie on the home endpoint <code>/</code></li>
+<li>The redir parameter, which is most probably the callback URL</li>
+</ul>
+</li>
+<li>The <code>finalizelogin</code> endpoint returns the most important parameter in order to be authenticated, the <code>steamLoginSecure</code>, which is passed to the <code>https://steamcommunity.com/login/settoken</code> endpoint, along with the sessionid</li>
+</ul>
+<h2 id="limitations">Limitations</h2>
+<p>Due to a protection mechanism that denies the access whenever a parameter is different between requester and approver, whether IP or country or device, the attack surface is pretty limited. The attacker needs to know exactly the location of the target account and try to contact the Steam endpoints by using the same country or ASN.</p>
+<h2 id="risks">Risks</h2>
+<p>The risks, like what could have happened to myself, is a total account compromise where the attacker impersonates the user on the Steam platform.</p>
+<h2 id="remediation-advices">Remediation advices</h2>
+<p>The vulnerability is caused by a lack of encryption for the QR code. Since a user could easily generate one of them, it&rsquo;s possible for an attacker to forge the them and attempt a phishing attack against uncaught users.
+Unfortunately there is no particular way to mitigate this issue in a QR-based authentication scenario. The general advice would be to avoid the mechanism completely and simply rely on user-password/OTP flow.
+Fortunately enough, Steam actually checks if the requester comes from unusual and unseen locations. Trusted locations are mainly based on previous successful login attempts and e-mail verifications.</p>
+<p>In short, never scan any QR code from a website different than the Steam one.</p>
+<h2 id="video">Video</h2>
+<div class="container">
+    <div id="player-wrapper" class="my-5"></div>
+  </div>
+  
+  <script 
+    type="text/javascript" 
+    src="https://cdn.jsdelivr.net/npm/@clappr/player@latest/dist/clappr.min.js"
+  >
+  </script>
+  
+  <script>
+    var playerElement = document.getElementById("player-wrapper");
+  
+    var player = new Clappr.Player({
+      source: "/csgomnia/poc.mp4",
+      mute: true,
+      height: 360,
+      width: 640
+    });
+  
+    player.attachTo(playerElement);  
+  </script>
+<h2 id="the-poc">The PoC</h2>
+<p>The PoC code will be published once I have a confirmation from the vendor (Valve).</p>
+</section>
+
+  
+  
+
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://voidzone.me/posts/cve-2022-44268-imagemagick-arbitrary-file-read/"
+      ><span>CVE-2022-44268 - Proof Of Concept of the ImageMagick Arbitrary File Read vulnerability</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://voidzone.me/">Voidzone</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>
