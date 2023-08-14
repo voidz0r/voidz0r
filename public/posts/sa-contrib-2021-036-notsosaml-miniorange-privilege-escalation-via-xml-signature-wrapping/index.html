@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>SA-CONTRIB-2021-036 - NotSoSAML - Privilege escalation via XML Signature Wrapping on Miniorange Drupal plugin - Voidzone</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  <meta name="description" content="This is a brief story about how a vulnerability on a drupal plugin has been found, which, when not configured correctly, could allow an authenticated user to perform a privilege escalation attack on the Drupal platform. This plugin, as stated in the usage section of the drupal website, is used by roughly 522 websites in the current month (June 2021) - ranging from version 7.x to 8.x Plugin stats.
+Some history and background SAML is a recognized and widely adopted security standard used by web applications for authenticating and authorizing users." />
+  <meta name="author" content="Cristian &#39;void&#39; Giustini" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://voidzone.me/main.min.css" />
+
+  
+  <script
+    defer
+    src="https://voidzone.me/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+   
+  <link rel="preload" as="image" href="https://voidzone.me/theme.png" />
+
+  
+  
+  
+  <link rel="preload" as="image" href="https://www.gravatar.com/avatar/d4f904f245c1fd17d7f8fc7b662b7076?s=160&amp;d=identicon" />
+  
+  
+
+  
+  <link rel="preload" as="image" href="https://voidzone.me/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/github.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/linkedin.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/mastodon.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/steam.svg" />
+  
+  
+
+  
+  
+
+  
+  <link rel="icon" href="https://voidzone.me/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://voidzone.me/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.115.4">
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="SA-CONTRIB-2021-036 - NotSoSAML - Privilege escalation via XML Signature Wrapping on Miniorange Drupal plugin" />
+<meta property="og:description" content="This is a brief story about how a vulnerability on a drupal plugin has been found, which, when not configured correctly, could allow an authenticated user to perform a privilege escalation attack on the Drupal platform. This plugin, as stated in the usage section of the drupal website, is used by roughly 522 websites in the current month (June 2021) - ranging from version 7.x to 8.x Plugin stats.
+Some history and background SAML is a recognized and widely adopted security standard used by web applications for authenticating and authorizing users." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://voidzone.me/posts/sa-contrib-2021-036-notsosaml-miniorange-privilege-escalation-via-xml-signature-wrapping/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-07-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-07-09T00:00:00+00:00" />
+
+  
+  <meta itemprop="name" content="SA-CONTRIB-2021-036 - NotSoSAML - Privilege escalation via XML Signature Wrapping on Miniorange Drupal plugin">
+<meta itemprop="description" content="This is a brief story about how a vulnerability on a drupal plugin has been found, which, when not configured correctly, could allow an authenticated user to perform a privilege escalation attack on the Drupal platform. This plugin, as stated in the usage section of the drupal website, is used by roughly 522 websites in the current month (June 2021) - ranging from version 7.x to 8.x Plugin stats.
+Some history and background SAML is a recognized and widely adopted security standard used by web applications for authenticating and authorizing users."><meta itemprop="datePublished" content="2021-07-09T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-07-09T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1314">
+<meta itemprop="keywords" content="" />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="SA-CONTRIB-2021-036 - NotSoSAML - Privilege escalation via XML Signature Wrapping on Miniorange Drupal plugin"/>
+<meta name="twitter:description" content="This is a brief story about how a vulnerability on a drupal plugin has been found, which, when not configured correctly, could allow an authenticated user to perform a privilege escalation attack on the Drupal platform. This plugin, as stated in the usage section of the drupal website, is used by roughly 522 websites in the current month (June 2021) - ranging from version 7.x to 8.x Plugin stats.
+Some history and background SAML is a recognized and widely adopted security standard used by web applications for authenticating and authorizing users."/>
+
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://voidzone.me/"
+      >Voidzone</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/voidz0r"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/voidz0r"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/voidde"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./mastodon.svg)"
+        href="https://infosec.exchange/@voidde"
+        target="_blank"
+        rel="me"
+      >
+        mastodon
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./steam.svg)"
+        href="https://steamcommunity.com/id/retvoid"
+        target="_blank"
+        rel="me"
+      >
+        steam
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">SA-CONTRIB-2021-036 - NotSoSAML - Privilege escalation via XML Signature Wrapping on Miniorange Drupal plugin</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Jul 9, 2021</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><p>This is a brief story about how a vulnerability on a drupal plugin has been found, which, when not configured correctly, could allow an authenticated user to perform a privilege escalation attack on the Drupal platform. This plugin, as stated in the usage section of the drupal website, is used by roughly 522 websites in the current month (June 2021) - ranging from version 7.x to 8.x Plugin stats.</p>
+<h2 id="some-history-and-background">Some history and background</h2>
+<p>SAML is a recognized and widely adopted security standard used by web applications for authenticating and authorizing users. The markup language, as someone could guess, is XML and the authentication payload is base64 encoded before being sent over HTTP POST request as a body parameter. The whole point of the SAML is to provide a standardized mechanism to authenticate/authorize clients to multiple platforms and, at the same time, gives the ability to have a single point of entry for authentication flows, also known as Single Sign On.</p>
+<h2 id="the-authentication-parties">The authentication parties</h2>
+<p>In a SAML authentication workflow there are three parties involved:</p>
+<ul>
+<li><strong>The client</strong>: this could be a browser or an application that needs to authenticate</li>
+<li><strong>The Identity Provider</strong>: this entity handles the authentication process and returns a valid SAML message that will be submitted to the Relying Party.</li>
+<li><strong>The Relying Party</strong>: this party receives the base64 encoded XML message, verify its signature and integrity and authenticates the client to the platform.</li>
+</ul>
+<p>The entire workflow is also called Single Sign On.</p>
+<p>The following schema summarizes the above points:
+<img src="/notsosaml/image-26.png" alt="SAML schema">)</p>
+<h2 id="what-are-saml-assertions">What are SAML assertions</h2>
+<p>SAML Assertions are claims about a subject. These claims should be verified once received by checking the <code>&lt;Signature&gt;</code> tag inside of the SAML body message.</p>
+<p><img src="/notsosaml/image-27.png" alt="SAML signature"></p>
+<p>SAML is a ~20y old security implementation, nonetheless many research revealed that most of the frameworks do not implement this protocol in a correct way. The most common pitfalls are:</p>
+<ul>
+<li><strong>Difficult-to-understand signing algorithm</strong>: contrary to simpler data formats such as PKCS#7 that produces a single hash for the entire document, the XML signature is quitely fragmented over the body of the message itself. With this confusion, it is quite common to forget some critical parts of the message.</li>
+<li><strong>The XML markup language itself</strong>: Long, overly-complicated and not-so-human-readable.</li>
+<li><strong>Architecture of the SAML frameworks</strong>: it is quite common to make one entity for the verification and the signature processes, while it is heavily recommended to split those two operations into different and, possibly, separated components in order to avoid confusion or bad application behaviors.</li>
+</ul>
+<h2 id="some-of-the-most-known-attacks-for-saml">Some of the most known attacks for SAML</h2>
+<p>Most common SAML implementation vulnerabilities can be summarized like this:</p>
+<ul>
+<li>
+<p><strong>Message replay attacks</strong>: The application doesn&rsquo;t check a specific unique-ID and allows an attacker to replay the same message multiple times in order to maintain or renew a valid authentication on the platform.</p>
+</li>
+<li>
+<p><strong>Invalid/missing signature</strong>: The application doesn&rsquo;t check the provided signature value against the Certificate Authority, or the the current CA is self-signed. This could allow an attacker to replace the CA with a custom-made self signed one.</p>
+</li>
+<li>
+<p><strong>SAML Recipient attack</strong>: The IdP doesn&rsquo;t check if the message comes from the intended service provider, allowing an attacker to send arbitrary requests to the identity provider.</p>
+</li>
+<li>
+<p><strong>XML Signature Wrapping (XSW)</strong>: These well known methodologies exploit how the application checks for multiple assertions, multiple signatures or behave differently based on the situation. There are several known methodologies that can be used such as:</p>
+<ul>
+<li>Applying a cloned unsigned copy of the Response before/after the existing signature</li>
+<li>Applying a cloned unsigned copy of the Assertion before/after the existing assertions.</li>
+<li>Changing a value in the signed copy of the Assertion block and add a copy of the original Assertion without the Signature.</li>
+<li>Adding an Extensions block with a cloned unsigned Assertion</li>
+<li>Adding an Object block containing a copy of the original assertion with the Signature removed.</li>
+<li>XML eXternal Entity (XXE): Since a SAML message is a plain XML file, some XML parsers could accept XXE payloads that leverage on the SYSTEM functionality of the XML parser or load an external DTD file - also known as Out-Of-Bound XXE.</li>
+</ul>
+</li>
+</ul>
+<h2 id="configuring-the-environment-for-exploitation">Configuring the environment for exploitation</h2>
+<h3 id="configuring-saml-integration-on-auth0-and-drupal">Configuring SAML integration on Auth0 and Drupal</h3>
+<p>The Miniorange_saml plugin allows Drupal administrators to integrate with third party identity platforms using the SAML protocol.</p>
+<p>For demonstration purposes, the plugin has been configured with the auth0 provider. The first step is to create an application in the auth0 dashboard and associate a SAML addon with it.</p>
+<p><img src="/notsosaml/image-28.png" alt="auth0 config"></p>
+<p>Once created, those settings should be placed in the miniorange_saml plugin section.
+<img src="/notsosaml/image-29.png" alt="plugin config"></p>
+<p>In order to exploit this vulnerability, the plugin must be configured without the Either SAML reponse or SAML assertion must be signed option and without the x.509 certificate.</p>
+<p><img src="/notsosaml/image-30.png" alt="bad config">
+Once everything is ready, the following option should appear on the drupal site.</p>
+<p><img src="/notsosaml/image-31.png" alt="drupal new option"></p>
+<h3 id="testing-it-out-and-exploiting-the-xsw">Testing it out and exploiting the XSW</h3>
+<p>Clicking on the <code>authenticate with auth0</code> option should bring up the auth0 login page.</p>
+<p><img src="/notsosaml/image-32.png" alt="authenticate with auth0"></p>
+<p>And, once successful, it will return to our website with our new user.</p>
+<p><img src="/notsosaml/image-33.png" alt="login success"></p>
+<p>By using a proxy like Burp Suite, it is possible to intercept the response from the Identity Server and analyze the SAML message that has been sent to the Relying Party:</p>
+<p><img src="/notsosaml/image-34.png" alt="intercepting requests with burp">
+And the decoded message:</p>
+<p><img src="/notsosaml/image-35.png" alt="decoded SAML message">
+At this point, all we have to do is to inject an additional <code>&lt;Assertion&gt;</code> element that will contain just the admin username as a <code>&lt;saml:NameID&gt;</code> inside a <code>&lt;saml:Subject&gt;</code> element. The rest of the element will be the same as the original one.</p>
+<p><img src="/notsosaml/image-36.png" alt="original one">
+<img src="/notsosaml/image-37.png" alt="original object">
+<img src="/notsosaml/image-38.png" alt="final object"></p>
+<p><strong>Note</strong>: this flaw could be also exploited by using the &ldquo;SAML Raider&rdquo; extension on burp suite, configured with the &ldquo;XSW 3&rdquo; payload.
+By sending the forged object, the following response should follow:</p>
+<p><img src="/notsosaml/image-39.png" alt="response after injecting the payload">
+And, finally, we&rsquo;ll get admin access.</p>
+<p><img src="/notsosaml/image-40.png" alt="admin access"></p>
+<h2 id="spotting-the-bug">Spotting the bug</h2>
+<p>Spotting the vulnerability in the code is pretty trivial in this case. The request is hitting the miniorange_samlController.php and, afterwards, the MiniOrangeAcs.php#processSamlResponse method.</p>
+<p><img src="/notsosaml/image-41.png" alt="bugged file #1">
+<img src="/notsosaml/image-42.png" alt="bugged file #2"></p>
+<p>Since the signature check could be bypassed (the green mark on the screenshot), the signature of our injected <Assertion> object isn&rsquo;t checked and the current() function will get only the first element of the array, which is the injected object, ignoring the other ones.</p>
+<p>Furthermore, the application doesn&rsquo;t enforce the <Assertion> signature and the x509 certificate.</p>
+<h2 id="conclusions">Conclusions</h2>
+<p>There are two main consequences for this bug:</p>
+<ul>
+<li><strong>Message Replay Attacks</strong>: As seen from the screenshots, the plugin allows to send the SAML response directly to the relying party endpoint without using the Identity Provider. This allows an attacker to replay the authentication unlimited times.</li>
+<li><strong>Privilege Escalation Attacks</strong>: An attacker could register a user using the external Identity Provider and escalate to higher privileges by knowing just the username of the target - which is pretty trivial since it is &ldquo;admin&rdquo;, most of the time.</li>
+</ul>
+<p>The affected version, at the time of writing, is the <strong>8.x-2.22</strong>, released on February 2021. The plugin could be downloaded from the <a href="https://www.drupal.org/project/miniorange_saml?ref=voidzone.me">Drupal plugin site</a>.</p>
+<p>This exploit has been tested using Drupal version 9.1.10 with PHP 8.0.7 and Apache/2.4.38 (Debian) on a <a href="https://hub.docker.com/_/drupal/?ref=voidzone.me">Docker container</a>.</p>
+<p>The main cause of this bug is the lack of enforcement for the x509 Certificate Value and Either SAML response or SAML assertion must be signed options in the Drupal admin interface. Unchecking these options could expose the entire Drupal application to the above mentioned vulnerabilities.</p>
+<h2 id="conclusions---afterwards">Conclusions - afterwards</h2>
+<h3 id="wordpress">Wordpress</h3>
+<p>The exploit isn&rsquo;t working for the Wordpress plugin version since it enforces the application to verify the signature of the <Assertion> and to provide a valid x509 certificate.</p>
+<h3 id="moodle">Moodle</h3>
+<p>The faulty logic could be found in the moodle plugin codebase too. While i had no luck configuring the plugin in a correct way, the code looks vulnerable:</p>
+<p><img src="/notsosaml/image-44.png" alt="moodle - bugged file"></p>
+<h2 id="responsible-disclosure-timeline">Responsible disclosure timeline</h2>
+<ul>
+<li>06/16/2021: First bug notification to miniorange (xecurify) company</li>
+<li>06/17/2021: Got first feedback, report has been sent</li>
+<li>06/22/2021: Got first update, report will be reviewed in the next friday</li>
+<li>07/01/2021: No updates. Sending the disclosure deadline</li>
+<li>07/09/2021: Got update from Xecurify, expected behavior and &ldquo;known&rdquo; issue. A hotfix will be pushed in the next sprint</li>
+<li>07/09/2021: Final disclosure</li>
+<li>09/23/2021: SA published</li>
+</ul>
+</section>
+
+  
+  
+
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://voidzone.me/posts/cve-2023-4136-formalms-authentication-bypss/"
+      ><span class="mr-1.5">←</span><span>CVE-2023-4136 - FormaLMS The evil default value that leads to Authentication Bypass</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://voidzone.me/posts/matrix-synapse-ssrf-cache-poisoning/"
+      ><span>Matrix Synapse 1.12.3 - SSRF and Cache poisoning</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://voidzone.me/">Voidzone</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

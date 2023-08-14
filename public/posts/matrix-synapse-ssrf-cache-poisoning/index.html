@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Matrix Synapse 1.12.3 - SSRF and Cache poisoning - Voidzone</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  <meta name="description" content="tl;dr The Matrix Synapse servers have been found affected by a security issue about the lack of a validation system for &ldquo;Server-to-server&rdquo; API leading to SSRF and Cache poisoning subsequently marked by the team as “feature” or “intended”. In short, a malicious user, if not specifically denied by configuration files, could effectively load malicious content using what is called the “Server-To-Server” API and, since the caching mechanism allows a lifetime of 24h, it could allow to host arbitrary files for that duration." />
+  <meta name="author" content="Cristian &#39;void&#39; Giustini" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://voidzone.me/main.min.css" />
+
+  
+  <script
+    defer
+    src="https://voidzone.me/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+   
+  <link rel="preload" as="image" href="https://voidzone.me/theme.png" />
+
+  
+  
+  
+  <link rel="preload" as="image" href="https://www.gravatar.com/avatar/d4f904f245c1fd17d7f8fc7b662b7076?s=160&amp;d=identicon" />
+  
+  
+
+  
+  <link rel="preload" as="image" href="https://voidzone.me/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/github.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/linkedin.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/mastodon.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/steam.svg" />
+  
+  
+
+  
+  
+
+  
+  <link rel="icon" href="https://voidzone.me/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://voidzone.me/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.115.4">
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="Matrix Synapse 1.12.3 - SSRF and Cache poisoning" />
+<meta property="og:description" content="tl;dr The Matrix Synapse servers have been found affected by a security issue about the lack of a validation system for &ldquo;Server-to-server&rdquo; API leading to SSRF and Cache poisoning subsequently marked by the team as “feature” or “intended”. In short, a malicious user, if not specifically denied by configuration files, could effectively load malicious content using what is called the “Server-To-Server” API and, since the caching mechanism allows a lifetime of 24h, it could allow to host arbitrary files for that duration." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://voidzone.me/posts/matrix-synapse-ssrf-cache-poisoning/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-01-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-01-14T00:00:00+00:00" />
+
+  
+  <meta itemprop="name" content="Matrix Synapse 1.12.3 - SSRF and Cache poisoning">
+<meta itemprop="description" content="tl;dr The Matrix Synapse servers have been found affected by a security issue about the lack of a validation system for &ldquo;Server-to-server&rdquo; API leading to SSRF and Cache poisoning subsequently marked by the team as “feature” or “intended”. In short, a malicious user, if not specifically denied by configuration files, could effectively load malicious content using what is called the “Server-To-Server” API and, since the caching mechanism allows a lifetime of 24h, it could allow to host arbitrary files for that duration."><meta itemprop="datePublished" content="2020-01-14T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-01-14T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1115">
+<meta itemprop="keywords" content="" />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Matrix Synapse 1.12.3 - SSRF and Cache poisoning"/>
+<meta name="twitter:description" content="tl;dr The Matrix Synapse servers have been found affected by a security issue about the lack of a validation system for &ldquo;Server-to-server&rdquo; API leading to SSRF and Cache poisoning subsequently marked by the team as “feature” or “intended”. In short, a malicious user, if not specifically denied by configuration files, could effectively load malicious content using what is called the “Server-To-Server” API and, since the caching mechanism allows a lifetime of 24h, it could allow to host arbitrary files for that duration."/>
+
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://voidzone.me/"
+      >Voidzone</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/voidz0r"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/voidz0r"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/voidde"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./mastodon.svg)"
+        href="https://infosec.exchange/@voidde"
+        target="_blank"
+        rel="me"
+      >
+        mastodon
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./steam.svg)"
+        href="https://steamcommunity.com/id/retvoid"
+        target="_blank"
+        rel="me"
+      >
+        steam
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Matrix Synapse 1.12.3 - SSRF and Cache poisoning</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Jan 14, 2020</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="tldr">tl;dr</h2>
+<p>The Matrix Synapse servers have been found affected by a security issue about the lack of a validation system for &ldquo;Server-to-server&rdquo; API leading to SSRF and Cache poisoning subsequently marked by the team as “feature” or “intended”.  In short, a malicious user, if not specifically denied by configuration files, could effectively load malicious content using what is called the “Server-To-Server” API and, since the caching mechanism allows a lifetime of 24h, it could allow to host arbitrary files for that duration.  After a discussion with the team they came to conclusion that this is an intended behavior and the best solution is to use an offload antivirus to scan for common malicious patterns on the uploaded files.</p>
+<p>I want to thank the security response team for the response and for the brief discussion.</p>
+<h2 id="responsible-disclosure-timeline">Responsible disclosure timeline</h2>
+<p>​</p>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2020-04-29</td>
+<td>Vendor is notified</td>
+</tr>
+<tr>
+<td>2020-05-31</td>
+<td>First contact with the security response team</td>
+</tr>
+<tr>
+<td>2020-06-08</td>
+<td>Discussion about the issue, marked as &ldquo;intended&rdquo;</td>
+</tr>
+<tr>
+<td>2020-06-16</td>
+<td>Disclosure</td>
+</tr>
+<tr>
+<td>​</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="introduction">Introduction</h2>
+<p>Matrix is an open standard for a decentralized, interoperable and real time communication over IP.  This standard is widely documented and it defines a set of open APIs for communications. Its main point of strength is the ability to have a decentralized, securely encrypted and segregated federation of servers, giving the opportunity to users to take advantage of the following capabilities:</p>
+<ul>
+<li>Instant Messaging (IM)</li>
+<li>Voice over IP (VoIP)</li>
+<li>Internet of Things (IoT) communication</li>
+</ul>
+<p>A good amount of integrations (or bridges) with external IM/VoIP protocols like:</p>
+<ul>
+<li>IRC</li>
+<li>Skype</li>
+<li>Telegram</li>
+<li>WhatsApp</li>
+<li>E-Mail</li>
+<li>Hangouts</li>
+<li>WeChat</li>
+<li>Twitter</li>
+<li>Keybase</li>
+<li>A good and simple set of JSON Rest APIs that allows developers to create their own clients or bots</li>
+<li>Fully opensource</li>
+<li>KISS principle</li>
+<li>End-To-End encryption feature by design</li>
+</ul>
+<h2 id="the-federation-concept">The federation concept</h2>
+<p>The idea behind a federation server is simple and yet effective; an isolated, on-premise Matrix server will be capable to interact with other servers using a common API.  Following a schema taken from the matrix.org website:</p>
+<p><img src="/matrix/image-8.png" alt="The matrix federated architecture">)</p>
+<p>Every matrix client connected to a federated server can, if not specifically denied by configuration, communicate with other people from other servers or channels. Private keys will not be shared among this process.  The communication between servers is documented in the Federation API (or Server-Server API) docs.</p>
+<h2 id="the-federation-api">The federation API</h2>
+<p>Matrix home-servers use the Federation API in order to communicate with each other. Home-servers interact with these APIs in order to push messages to each user, join channels, retrieve history and query information about users using JSON format.  One part of this is called the “Server discovery” API and it will be the subject of this research.</p>
+<h2 id="the-bug---ssrf-and-cache-poisoning">The bug - SSRF and Cache Poisoning</h2>
+<p>If not specified, matrix home-servers allows to integrate with other federated servers by using an exposed API. The following screenshot is an example of a file download that is located in the matrix.org federated server:</p>
+<p><img src="/matrix/image-9.png" alt="original request">
+The highlighted part defines which federated server should be used to download the file. By giving a different URL, the following response is received:</p>
+<p><img src="/matrix/image-10.png" alt="updated request"></p>
+<p><img src="/matrix/image-11.png" alt="callback received">
+So, the federated server is looking for a <code>server</code> file inside the <code>.well-known/matrix</code> path. As specified in the documentation, the server is expecting a JSON formatted file that specifies the information about the federated server like the following:</p>
+<p><img src="/matrix/image-12.png" alt="expected config file">
+With this in mind, some aspects should be considered:</p>
+<ul>
+<li>Loopback or localhost address, even specified as numeric IPs (like 127.0.0.1) are blacklisted by default (the “federation_ip_range_blacklist” parameter on “homeserver.yaml” file)</li>
+<li>Using protocols different from HTTP or HTTPS will result in a timeout
+30x redirects are accepted</li>
+<li>The cache lifetime is statically set to 86400 seconds (1 day). When a subsequent request to the same host is made, the result will be the same as the last one (this opens a Cache Poisoning scenario).</li>
+<li>If not specified, the 8448 port will be used</li>
+<li>The TLS certificate must be valid, so no unencrypted protocols can be used (if not allowed from configuration file)</li>
+</ul>
+<p>The next step is to create a configuration file that points to the attacker’s-controlled endpoint:</p>
+<p><img src="/matrix/image-13.png" alt="new configuration file">
+And, after issuing another request, a callback is received:</p>
+<p><img src="/matrix/image-14.png" alt="new request"></p>
+<p><img src="/matrix/image-15.png" alt="callback">
+In order to obtain a full exploitation scenario, a “malicious file” is created.</p>
+<p><img src="/matrix/image-16.png" alt="creating a malicious file">
+And a new host is configured on .well-known/matrix/server file:</p>
+<p><img src="/matrix/image-17.png" alt="new matrix server configuration file">
+Then, a new request for the “malicious_file” is made:</p>
+<p><img src="/matrix/image-18.png" alt="malicious file is cached for 24h"></p>
+<p>So, from now on, this file will be available in matrix.org servers for 24 hours; even if the external federated server is not available.</p>
+<p><img src="/matrix/image-19.png" alt="file download"></p>
+<h2 id="impact-of-this-vulnerability">Impact of this vulnerability</h2>
+<p>An attacker could exploit these two vulnerabilities in order to:</p>
+<ul>
+<li>Host malwares or, generally speaking, infected files</li>
+<li>Use it as a C2 server in order to broadcast files or messages</li>
+<li>Use it to launch denial of service attacks</li>
+<li>Hide the attacker IP while sending HTTP requests (using the server as a reverse proxy).</li>
+<li>If an XSS vulnerable application is hosted on the same host, this could bypass the Same-Origin Policy and allows an attacker to embed
+JavaScript files directly into the application, as long as share application cookies.</li>
+</ul>
+<h2 id="affected-versions">Affected versions</h2>
+<p>At the time of writing, the affected version is <code>1.12.3</code> as reported from the matrix.org API:</p>
+<p>Remediation
+The remediation is simple and it’s just a matter of specifying a list of whitelisted federated servers on the “/etc/matrix-synapse/homeserver.yaml” file. Unfortunately, this parameter is not set by default nor mandatory while installing the matrix server and there are some considerations to take in mind while applying this remediation (take a look at “Final considerations and thoughts” chapter).</p>
+<p><img src="/matrix/image-20.png" alt="remediation"></p>
+<h2 id="final-considerations-and-thoughts">Final considerations and thoughts</h2>
+<p>There are some aspects to take in consideration while analyzing this vulnerability. This flaw is basically leveraging on a feature and, in some cases, a remediation like the one proposed in the “Remediation” chapter isn’t feasible.  A server like Matrix.org that SHOULD allow every federated server to connect and interact; the whitelist scenario may not be applicable.</p>
+<p>Keeping the default settings and letting every federated server to inter-communicate with each other is a serious security risk. This, at the same time, would effectively help the “Federated network” concept to grow.</p>
+<p>Fixing this vulnerability could be a serious hit on the matrix-synapse federated network’s idea. If the server blocks the ability to download files or perform requests to external locations, shared files will not be share among other federated servers. The result is that User A on server 1 cannot share files with User B on server 2, and vice-versa.</p>
+<p>Lastly, while the note on the configuration file “/etc/matrix-synapse/homeserver.yaml” states:</p>
+<p><em>N.B. we recommend also firewalling your federation listener to limit  # inbound federation traffic as early as possible, rather than relying  # purely on this application-layer restriction. If not specified, the  # default is to whitelist everything.</em></p>
+<p>This clearly isn’t a good solution if the server needs to be inter-connected with the rest of the world.</p>
+</section>
+
+  
+  
+
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://voidzone.me/posts/sa-contrib-2021-036-notsosaml-miniorange-privilege-escalation-via-xml-signature-wrapping/"
+      ><span class="mr-1.5">←</span><span>SA-CONTRIB-2021-036 - NotSoSAML - Privilege escalation via XML Signature Wrapping on Miniorange Drupal plugin</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://voidzone.me/posts/cve-2018-2013-daikin-emura-series-arbitrary-remote-control-dns-rebinding/"
+      ><span>CVE-2018-20139 - Daikin Emura Series - Arbitrary Remote Control via DNS Rebinding</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://voidzone.me/">Voidzone</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

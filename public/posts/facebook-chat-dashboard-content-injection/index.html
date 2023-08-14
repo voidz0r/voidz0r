@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Facebook chat / dashboard content injection - Voidzone</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  <meta name="description" content="Some time ago a friend of mine was spear-phished with a message through the Facebook chat, this happened before Facebook patched the chat application, allowing to exchange of messages only between people connected as friends. While I was analyzing the message, I noticed that it looked like a legit message, with a link to a newspaper page, a title, body and image, but also with a pseudo-random generated domain like the killswitch domain used by WannaCry ransomware, written in a small gray text area below the description." />
+  <meta name="author" content="Cristian &#39;void&#39; Giustini" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://voidzone.me/main.min.css" />
+
+  
+  <script
+    defer
+    src="https://voidzone.me/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+   
+  <link rel="preload" as="image" href="https://voidzone.me/theme.png" />
+
+  
+  
+  
+  <link rel="preload" as="image" href="https://www.gravatar.com/avatar/d4f904f245c1fd17d7f8fc7b662b7076?s=160&amp;d=identicon" />
+  
+  
+
+  
+  <link rel="preload" as="image" href="https://voidzone.me/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/github.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/linkedin.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/mastodon.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/steam.svg" />
+  
+  
+
+  
+  
+
+  
+  <link rel="icon" href="https://voidzone.me/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://voidzone.me/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.115.4">
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="Facebook chat / dashboard content injection" />
+<meta property="og:description" content="Some time ago a friend of mine was spear-phished with a message through the Facebook chat, this happened before Facebook patched the chat application, allowing to exchange of messages only between people connected as friends. While I was analyzing the message, I noticed that it looked like a legit message, with a link to a newspaper page, a title, body and image, but also with a pseudo-random generated domain like the killswitch domain used by WannaCry ransomware, written in a small gray text area below the description." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://voidzone.me/posts/facebook-chat-dashboard-content-injection/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-01-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-01-03T00:00:00+00:00" />
+
+  
+  <meta itemprop="name" content="Facebook chat / dashboard content injection">
+<meta itemprop="description" content="Some time ago a friend of mine was spear-phished with a message through the Facebook chat, this happened before Facebook patched the chat application, allowing to exchange of messages only between people connected as friends. While I was analyzing the message, I noticed that it looked like a legit message, with a link to a newspaper page, a title, body and image, but also with a pseudo-random generated domain like the killswitch domain used by WannaCry ransomware, written in a small gray text area below the description."><meta itemprop="datePublished" content="2018-01-03T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2018-01-03T00:00:00+00:00" />
+<meta itemprop="wordCount" content="499">
+<meta itemprop="keywords" content="" />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Facebook chat / dashboard content injection"/>
+<meta name="twitter:description" content="Some time ago a friend of mine was spear-phished with a message through the Facebook chat, this happened before Facebook patched the chat application, allowing to exchange of messages only between people connected as friends. While I was analyzing the message, I noticed that it looked like a legit message, with a link to a newspaper page, a title, body and image, but also with a pseudo-random generated domain like the killswitch domain used by WannaCry ransomware, written in a small gray text area below the description."/>
+
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://voidzone.me/"
+      >Voidzone</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/voidz0r"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/voidz0r"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/voidde"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./mastodon.svg)"
+        href="https://infosec.exchange/@voidde"
+        target="_blank"
+        rel="me"
+      >
+        mastodon
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./steam.svg)"
+        href="https://steamcommunity.com/id/retvoid"
+        target="_blank"
+        rel="me"
+      >
+        steam
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Facebook chat / dashboard content injection</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Jan 3, 2018</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><p>Some time ago a friend of mine was spear-phished with a message through the Facebook chat, this happened before Facebook patched the chat application, allowing to exchange of messages only between people connected as friends. While I was analyzing the message, I noticed that it looked like a legit message, with a link to a newspaper page, a title, body and image, but also with a pseudo-random generated domain like the killswitch domain used by WannaCry ransomware, written in a small gray text area below the description.</p>
+<p>Crawling on Google I found out that someone already reported a similar finding to Facebook Security Team but it was not exactly the same issue that I discovered; they were just talking about the ability to to inject whatever URL inside opengraph tags. So I decided to go straight through that to figure out something more.</p>
+<h2 id="analysis">Analysis</h2>
+<p>The Facebook chat and board features implement a functionality to generate a preview box whenever someone write a full URL in a message; the Facebook crawler, then, will scan the target website, take some markup headers parameters like og:title og:description along with an icon of the page and returns a preview box. This is a part of the already known OpenGraph Markup Language, nothing new.</p>
+<p>What I didn&rsquo;t expect is that the Facebook web application uses client-side data to generate the final preview box.</p>
+<p><img src="/facebook/0.jpg" alt="PoC"></p>
+<h2 id="getting-hands-dirty">Getting hands dirty</h2>
+<p>Starting Burp Suite I started to intercept all the traffic from and to the website; I used repubblica.it as a target, an italian newspaper.</p>
+<p><strong>Note</strong>: I tested it out by sending message to myself in order to not violate facebook disclosure rules.</p>
+<p><img src="/facebook/image.png" alt="PoC">
+And, by changing those URLs:</p>
+<p><img src="/facebook/image-1.png" alt="PoC">
+And after forwarding the message:</p>
+<p><img src="/facebook/image-2.png" alt="PoC">
+The original URL, the icon, title and body is taken directly from the repubblica.it website, except for that little grayed text below &ldquo;google.it&rdquo;. When we click on it we will get:</p>
+<p><img src="/facebook/image-3.png" alt="PoC">
+Bullseye!</p>
+<p>At this stage we know:</p>
+<ul>
+<li>The output URL is what we sent from AJAX POST request</li>
+<li>URLs are not encoded</li>
+<li>Server does not validate if the input URL is the same that we typed it.</li>
+<li>Server does not validate if the result mismatch with our tampered request.</li>
+</ul>
+<h2 id="mitmproxy-to-the-rescue">Mitmproxy to the rescue!</h2>
+<p>Mitmproxy is basically a python software that acts as an HTTP proxy like BurpSuite but with the ability to change every aspect of an HTTP request or response at runtime; it can even be used as an interactive console to change/inspect HTTP requests.</p>
+<p>I wrote a small python script that takes everything I got from the POST request sent to /messaging/send endpoint and replaced every URL (<a href="https://www.repubblica.it">www.repubblica.it</a>) with our domain, using a regular expression.</p>
+<p>Since the server somehow does not like query string parameters, I configured a website to perform a permanent redirect to a youtube video.</p>
+<p><img src="/facebook/image-4.png" alt="mitm">
+<img src="/facebook/image-5.png" alt="mitm"></p>
+<p>After clicking on it:</p>
+<p><img src="/facebook/image-6.png" alt="poc"></p>
+<h2 id="foot-notes">Foot notes</h2>
+<p>Facebook security team is already aware of this issue and this is the response:
+<img src="/facebook/image-7.png" alt="response"></p>
+<p>So they will consider it as &ldquo;low-impact risk&rdquo; and, most probably, they will not fix it.</p>
+</section>
+
+  
+  
+
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://voidzone.me/posts/cve-2018-2013-daikin-emura-series-arbitrary-remote-control-dns-rebinding/"
+      ><span class="mr-1.5">←</span><span>CVE-2018-20139 - Daikin Emura Series - Arbitrary Remote Control via DNS Rebinding</span></a
+    >
+    
+    
+  </nav>
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://voidzone.me/">Voidzone</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

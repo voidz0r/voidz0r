@@ -2,12 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://example.org/about/</loc>
+    <loc>https://voidzone.me/about/</loc>
+    <lastmod>2023-07-27T01:17:13+02:00</lastmod>
   </url><url>
-    <loc>http://example.org/categories/</loc>
+    <loc>https://voidzone.me/posts/cve-2022-44268-imagemagick-arbitrary-file-read/</loc>
+    <lastmod>2023-02-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/tags/</loc>
+    <loc>https://voidzone.me/posts/</loc>
+    <lastmod>2023-02-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/</loc>
+    <loc>https://voidzone.me/</loc>
+    <lastmod>2023-02-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://voidzone.me/posts/cve-2022-29885-apache-tomcat-cluster-service-dos/</loc>
+    <lastmod>2022-07-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://voidzone.me/posts/cve-2023-4136-formalms-authentication-bypss/</loc>
+    <lastmod>2021-11-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://voidzone.me/posts/sa-contrib-2021-036-notsosaml-miniorange-privilege-escalation-via-xml-signature-wrapping/</loc>
+    <lastmod>2021-07-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://voidzone.me/posts/matrix-synapse-ssrf-cache-poisoning/</loc>
+    <lastmod>2020-01-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://voidzone.me/posts/cve-2018-2013-daikin-emura-series-arbitrary-remote-control-dns-rebinding/</loc>
+    <lastmod>2018-12-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://voidzone.me/posts/facebook-chat-dashboard-content-injection/</loc>
+    <lastmod>2018-01-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://voidzone.me/categories/</loc>
+  </url><url>
+    <loc>https://voidzone.me/series/</loc>
+  </url><url>
+    <loc>https://voidzone.me/tags/</loc>
   </url>
 </urlset>

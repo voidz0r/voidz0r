@@ -27,10 +27,30 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <html
   class="not-ready lg:text-base"
   style="--bg: #faf8f1"
-  lang="en-us"
+  lang="en"
 >
   <head>
   <meta charset="utf-8" />
@@ -41,7 +61,7 @@
   />
 
   
-  <title>Categories - Void&#39;s personal website</title>
+  <title>Categories - Voidzone</title>
 
   
   <meta name="theme-color" />
@@ -54,7 +74,7 @@
     name="description"
     content="A personal blog"
   />
-  <meta name="author" content="Void&#39;s personal website" />
+  <meta name="author" content="Cristian &#39;void&#39; Giustini" />
   
 
   
@@ -63,28 +83,40 @@
   
   
   
-  <link rel="preload stylesheet" as="style" href="http://example.org/main.min.css" />
+  <link rel="preload stylesheet" as="style" href="https://voidzone.me/main.min.css" />
 
   
 
   
    
-  <link rel="preload" as="image" href="http://example.org/theme.png" />
+  <link rel="preload" as="image" href="https://voidzone.me/theme.png" />
 
   
   
   
+  <link rel="preload" as="image" href="https://www.gravatar.com/avatar/d4f904f245c1fd17d7f8fc7b662b7076?s=160&amp;d=identicon" />
+  
+  
+
+  
+  <link rel="preload" as="image" href="https://voidzone.me/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/github.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/linkedin.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/mastodon.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/steam.svg" />
+  
   
 
   
   
 
   
-  
-
-  
-  <link rel="icon" href="http://example.org/favicon.ico" />
-  <link rel="apple-touch-icon" href="http://example.org/apple-touch-icon.png" />
+  <link rel="icon" href="https://voidzone.me/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://voidzone.me/apple-touch-icon.png" />
 
   
   <meta name="generator" content="Hugo 0.115.4">
@@ -94,8 +126,8 @@
   <link
     rel="alternate"
     type="application/rss&#43;xml"
-    href="http://example.org/categories/index.xml"
-    title="Void&#39;s personal website"
+    href="https://voidzone.me/categories/index.xml"
+    title="Voidzone"
   />
   
 
@@ -109,7 +141,7 @@
   <meta property="og:title" content="Categories" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://example.org/categories/" />
+<meta property="og:url" content="https://voidzone.me/categories/" />
 
   
   <meta itemprop="name" content="Categories">
@@ -128,8 +160,8 @@
   <div class="relative z-50 mr-auto flex items-center">
     <a
       class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
-      href="http://example.org/"
-      >Void&#39;s personal website</a
+      href="https://voidzone.me/"
+      >Voidzone</a
     >
     <div
       class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
@@ -193,7 +225,73 @@
   >
     
     
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+    </nav>
+    
 
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/voidz0r"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/voidz0r"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/voidde"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./mastodon.svg)"
+        href="https://infosec.exchange/@voidde"
+        target="_blank"
+        rel="me"
+      >
+        mastodon
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./steam.svg)"
+        href="https://steamcommunity.com/id/retvoid"
+        target="_blank"
+        rel="me"
+      >
+        steam
+      </a>
+      
+    </nav>
     
   </div>
 </header>
@@ -225,7 +323,7 @@
 >
   <div class="mr-auto">
     &copy; 2023
-    <a class="link" href="http://example.org/">Void&#39;s personal website</a>
+    <a class="link" href="https://voidzone.me/">Voidzone</a>
   </div>
   <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
     >Powered by Hugo️️</a

@@ -1,18 +1,95 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Void&#39;s personal website</title>
-    <link>http://example.org/</link>
-    <description>Recent content on Void&#39;s personal website</description>
+    <title>Voidzone</title>
+    <link>https://voidzone.me/</link>
+    <description>Recent content on Voidzone</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <copyright>Copyright © 2023, Cristian &#39;void&#39;; all rights reserved.</copyright>
+    <lastBuildDate>Sun, 05 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://voidzone.me/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title></title>
-      <link>http://example.org/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>About me</title>
+      <link>https://voidzone.me/about/</link>
+      <pubDate>Thu, 27 Jul 2023 01:17:13 +0200</pubDate>
       
-      <guid>http://example.org/about/</guid>
-      <description></description>
+      <guid>https://voidzone.me/about/</guid>
+      <description>I’m a penetration tester and repented developer. I love to break things and I easily get excited whenever a shell pops up. As part of my development madness, I’m quite familiar with:
+PHP Python Java C Haskell Rust - still learning Golang - in a clunky way As for the infosec part of my job, I’m used to deal with:
+Appsec - Any language or product, in every form/aberration. IoT/Mobile Penetration testing Netsec OSINT Social engineering Reverse engineering Red teaming Since 2018, I got my OSCP certification.</description>
+    </item>
+    
+    <item>
+      <title>CVE-2022-44268 - Proof Of Concept of the ImageMagick Arbitrary File Read vulnerability</title>
+      <link>https://voidzone.me/posts/cve-2022-44268-imagemagick-arbitrary-file-read/</link>
+      <pubDate>Sun, 05 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://voidzone.me/posts/cve-2022-44268-imagemagick-arbitrary-file-read/</guid>
+      <description>Preface This is a proof of concept of the ImageMagick bug discovered by MetabaseQ Team.
+ImageMagick - Arbitrary File Read PoC
+Further instructions about the bug can be found on the MetabaseQ Team research paper linked above.
+Tested on ImageMagick v. 7.1.0-48 and 6.9.11-60
+Please note: at the time of writing there is no fix available.</description>
+    </item>
+    
+    <item>
+      <title>CVE-2022-29885 Apache Tomcat Cluster Service DoS</title>
+      <link>https://voidzone.me/posts/cve-2022-29885-apache-tomcat-cluster-service-dos/</link>
+      <pubDate>Wed, 13 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://voidzone.me/posts/cve-2022-29885-apache-tomcat-cluster-service-dos/</guid>
+      <description>Warning While performing the analysis I discovered that this was a part of a research made by 4ra1n, who reported the issue to the Apache Tomcat Security Team on 17 April 2022 and marked as CVE-2022-29885. Nonetheless, I had no luck finding a suitable PoC of the vulnerability.
+Update #2: Finally found the website of the author. Credits to him for the CVE.
+Update #3: An old Unsafe Deserialization was found.</description>
+    </item>
+    
+    <item>
+      <title>CVE-2023-4136 - FormaLMS The evil default value that leads to Authentication Bypass</title>
+      <link>https://voidzone.me/posts/cve-2023-4136-formalms-authentication-bypss/</link>
+      <pubDate>Tue, 02 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://voidzone.me/posts/cve-2023-4136-formalms-authentication-bypss/</guid>
+      <description>Preface As part of a recent research activity, we stumbled upon FormaLMS. The project is an open source Learning Management System built by forma.association and aimed at companies who want a learning platform for internal employees, partners, dealers and sellers. The project is opensource and could be downloaded from the main website: formalms.org and the tested version is the 2.3. Update: the exploit is working on version &amp;lt;= 2.4.4
+Responsible disclosure timeline Date Notes 2021/10/02 Vulnerability has been found 2021/10/06 Notification has been sent 2021/10/21 No answer.</description>
+    </item>
+    
+    <item>
+      <title>SA-CONTRIB-2021-036 - NotSoSAML - Privilege escalation via XML Signature Wrapping on Miniorange Drupal plugin</title>
+      <link>https://voidzone.me/posts/sa-contrib-2021-036-notsosaml-miniorange-privilege-escalation-via-xml-signature-wrapping/</link>
+      <pubDate>Fri, 09 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://voidzone.me/posts/sa-contrib-2021-036-notsosaml-miniorange-privilege-escalation-via-xml-signature-wrapping/</guid>
+      <description>This is a brief story about how a vulnerability on a drupal plugin has been found, which, when not configured correctly, could allow an authenticated user to perform a privilege escalation attack on the Drupal platform. This plugin, as stated in the usage section of the drupal website, is used by roughly 522 websites in the current month (June 2021) - ranging from version 7.x to 8.x Plugin stats.
+Some history and background SAML is a recognized and widely adopted security standard used by web applications for authenticating and authorizing users.</description>
+    </item>
+    
+    <item>
+      <title>Matrix Synapse 1.12.3 - SSRF and Cache poisoning</title>
+      <link>https://voidzone.me/posts/matrix-synapse-ssrf-cache-poisoning/</link>
+      <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://voidzone.me/posts/matrix-synapse-ssrf-cache-poisoning/</guid>
+      <description>tl;dr The Matrix Synapse servers have been found affected by a security issue about the lack of a validation system for &amp;ldquo;Server-to-server&amp;rdquo; API leading to SSRF and Cache poisoning subsequently marked by the team as “feature” or “intended”. In short, a malicious user, if not specifically denied by configuration files, could effectively load malicious content using what is called the “Server-To-Server” API and, since the caching mechanism allows a lifetime of 24h, it could allow to host arbitrary files for that duration.</description>
+    </item>
+    
+    <item>
+      <title>CVE-2018-20139 - Daikin Emura Series - Arbitrary Remote Control via DNS Rebinding</title>
+      <link>https://voidzone.me/posts/cve-2018-2013-daikin-emura-series-arbitrary-remote-control-dns-rebinding/</link>
+      <pubDate>Fri, 14 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://voidzone.me/posts/cve-2018-2013-daikin-emura-series-arbitrary-remote-control-dns-rebinding/</guid>
+      <description>There is a lot of hype around DNS rebinding vulnerability and vulnerable IoT devices, including home cameras, air conditioners or climate control devices; this flaw will cover the lack of origin checking on HTTP requests.
+DNS Rebinding Attack DNS Rebinding allows an attacker who has control on a DNS server to communicate with a device connected to the internal network of the victim.
+Normally, these kind of attacks are mitigated by the Same-Origin policy header, implemented by most of the browsers, that will block every attempt to load external content that does not belong to the original domain.</description>
+    </item>
+    
+    <item>
+      <title>Facebook chat / dashboard content injection</title>
+      <link>https://voidzone.me/posts/facebook-chat-dashboard-content-injection/</link>
+      <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://voidzone.me/posts/facebook-chat-dashboard-content-injection/</guid>
+      <description>Some time ago a friend of mine was spear-phished with a message through the Facebook chat, this happened before Facebook patched the chat application, allowing to exchange of messages only between people connected as friends. While I was analyzing the message, I noticed that it looked like a legit message, with a link to a newspaper page, a title, body and image, but also with a pseudo-random generated domain like the killswitch domain used by WannaCry ransomware, written in a small gray text area below the description.</description>
     </item>
     
   </channel>
