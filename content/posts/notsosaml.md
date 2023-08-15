@@ -2,6 +2,7 @@
 title: "SA-CONTRIB-2021-036 - NotSoSAML - Privilege escalation via XML Signature Wrapping on Miniorange Drupal plugin"
 slug: "sa-contrib-2021-036-notsosaml-miniorange-privilege-escalation-via-xml-signature-wrapping"
 date: 2021-07-09
+images: ["logo/void.png"]
 ---
 
 This is a brief story about how a vulnerability on a drupal plugin has been found, which, when not configured correctly, could allow an authenticated user to perform a privilege escalation attack on the Drupal platform. This plugin, as stated in the usage section of the drupal website, is used by roughly 522 websites in the current month (June 2021) - ranging from version 7.x to 8.x Plugin stats.

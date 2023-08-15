@@ -2,6 +2,7 @@
 title: "CVE-2018-20139 - Daikin Emura Series - Arbitrary Remote Control via DNS Rebinding"
 slug: "cve-2018-2013-daikin-emura-series-arbitrary-remote-control-dns-rebinding"
 date: 2018-12-14
+images: ["logo/void.png"]
 ---
 
 There is a lot of hype around DNS rebinding vulnerability and vulnerable IoT devices, including home cameras, air conditioners or climate control devices; this flaw will cover the lack of origin checking on HTTP requests.

@@ -2,6 +2,7 @@
 title: "CVE-2022-44268 - Proof Of Concept of the ImageMagick Arbitrary File Read vulnerability"
 date: 2023-02-05
 slug: "cve-2022-44268-imagemagick-arbitrary-file-read"
+images: ["logo/void.png"]
 ---
 
 ## Preface

@@ -2,6 +2,7 @@
 title: "Facebook chat / dashboard content injection"
 slug: "facebook-chat-dashboard-content-injection"
 date: 2018-01-03
+images: ["logo/void.png"]
 ---
 
 Some time ago a friend of mine was spear-phished with a message through the Facebook chat, this happened before Facebook patched the chat application, allowing to exchange of messages only between people connected as friends. While I was analyzing the message, I noticed that it looked like a legit message, with a link to a newspaper page, a title, body and image, but also with a pseudo-random generated domain like the killswitch domain used by WannaCry ransomware, written in a small gray text area below the description.
