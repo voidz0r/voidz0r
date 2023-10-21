@@ -132,15 +132,37 @@ After a few minutes I received a message from the user, asking for a vote on a s
   
   
   
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-Z425PXG6E5', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
   
   
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z425PXG6E5"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Z425PXG6E5', { 'anonymize_ip': false });
+}
+</script>
+
   
   <meta property="og:title" content="A phishing attempt on Steam that became a Qrljacking research" />
 <meta property="og:description" content="Preface This is a brief story about a phishing attempt made by a user that turned out into a little research.
 The initial contact The first contact I had was with a profile named Abigail🌻 who sent me a friend invite on steam.
 After a few minutes I received a message from the user, asking for a vote on a specific CS:GO AK-47 skin. Unfortunately I didn&rsquo;t take screenshot of the conversation because I got blocked and the messages are gone." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://voidzone.me/posts/a-phishing-attempt-on-steam-that-became-qrljacking/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://voidzone.me/posts/a-phishing-attempt-on-steam-that-became-qrljacking/" /><meta property="og:image" content="https://voidzone.me/logo/void.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-08-11T13:59:55+02:00" />
 <meta property="article:modified_time" content="2023-08-11T13:59:55+02:00" />
 
@@ -150,10 +172,12 @@ After a few minutes I received a message from the user, asking for a vote on a s
 The initial contact The first contact I had was with a profile named Abigail🌻 who sent me a friend invite on steam.
 After a few minutes I received a message from the user, asking for a vote on a specific CS:GO AK-47 skin. Unfortunately I didn&rsquo;t take screenshot of the conversation because I got blocked and the messages are gone."><meta itemprop="datePublished" content="2023-08-11T13:59:55+02:00" />
 <meta itemprop="dateModified" content="2023-08-11T13:59:55+02:00" />
-<meta itemprop="wordCount" content="950">
+<meta itemprop="wordCount" content="985"><meta itemprop="image" content="https://voidzone.me/logo/void.png">
 <meta itemprop="keywords" content="" />
   
-  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://voidzone.me/logo/void.png"/>
+
 <meta name="twitter:title" content="A phishing attempt on Steam that became a Qrljacking research"/>
 <meta name="twitter:description" content="Preface This is a brief story about a phishing attempt made by a user that turned out into a little research.
 The initial contact The first contact I had was with a profile named Abigail🌻 who sent me a friend invite on steam.
@@ -395,7 +419,7 @@ After a few minutes I received a message from the user, asking for a vote on a s
 <p>The risks, like what could have happened to myself, is a total account compromise where the attacker impersonates the user on the Steam platform.</p>
 <h2 id="remediation-advices">Remediation advices</h2>
 <p>The vulnerability is caused by a lack of encryption for the QR code. Since a user could easily generate one of them, it&rsquo;s possible for an attacker to forge the them and attempt a phishing attack against uncaught users.
-Unfortunately there is no particular way to mitigate this issue in a QR-based authentication scenario. The general advice would be to avoid the mechanism completely and simply rely on user-password/OTP flow.
+Unfortunately there is no particular way to mitigate this issue in a QR-based authentication scenario. The general advice would be to avoid the mechanism completely and simply rely on user-password/OTP flow or, in alternative, to implement two types of QR codes, public and private, that will be validated on the server side. But this requires a bit of effort and a planned re-enginerization of the mechanism.
 Fortunately enough, Steam actually checks if the requester comes from unusual and unseen locations. Trusted locations are mainly based on previous successful login attempts and e-mail verifications.</p>
 <p>In short, never scan any QR code from a website different than the Steam one.</p>
 <h2 id="video">Video</h2>

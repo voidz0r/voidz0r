@@ -130,13 +130,35 @@
   
   
   
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-Z425PXG6E5', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
   
   
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z425PXG6E5"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Z425PXG6E5', { 'anonymize_ip': false });
+}
+</script>
+
   
   <meta property="og:title" content="Matrix Synapse 1.12.3 - SSRF and Cache poisoning" />
 <meta property="og:description" content="tl;dr The Matrix Synapse servers have been found affected by a security issue about the lack of a validation system for &ldquo;Server-to-server&rdquo; API leading to SSRF and Cache poisoning subsequently marked by the team as “feature” or “intended”. In short, a malicious user, if not specifically denied by configuration files, could effectively load malicious content using what is called the “Server-To-Server” API and, since the caching mechanism allows a lifetime of 24h, it could allow to host arbitrary files for that duration." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://voidzone.me/posts/matrix-synapse-ssrf-cache-poisoning/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://voidzone.me/posts/matrix-synapse-ssrf-cache-poisoning/" /><meta property="og:image" content="https://voidzone.me/logo/void.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-01-14T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-01-14T00:00:00+00:00" />
 
@@ -144,10 +166,12 @@
   <meta itemprop="name" content="Matrix Synapse 1.12.3 - SSRF and Cache poisoning">
 <meta itemprop="description" content="tl;dr The Matrix Synapse servers have been found affected by a security issue about the lack of a validation system for &ldquo;Server-to-server&rdquo; API leading to SSRF and Cache poisoning subsequently marked by the team as “feature” or “intended”. In short, a malicious user, if not specifically denied by configuration files, could effectively load malicious content using what is called the “Server-To-Server” API and, since the caching mechanism allows a lifetime of 24h, it could allow to host arbitrary files for that duration."><meta itemprop="datePublished" content="2020-01-14T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2020-01-14T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1115">
+<meta itemprop="wordCount" content="1115"><meta itemprop="image" content="https://voidzone.me/logo/void.png">
 <meta itemprop="keywords" content="" />
   
-  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://voidzone.me/logo/void.png"/>
+
 <meta name="twitter:title" content="Matrix Synapse 1.12.3 - SSRF and Cache poisoning"/>
 <meta name="twitter:description" content="tl;dr The Matrix Synapse servers have been found affected by a security issue about the lack of a validation system for &ldquo;Server-to-server&rdquo; API leading to SSRF and Cache poisoning subsequently marked by the team as “feature” or “intended”. In short, a malicious user, if not specifically denied by configuration files, could effectively load malicious content using what is called the “Server-To-Server” API and, since the caching mechanism allows a lifetime of 24h, it could allow to host arbitrary files for that duration."/>
 
