@@ -405,26 +405,27 @@ Once everything is ready, the following option should appear on the drupal site.
 <p><img src="/notsosaml/image-31.png" alt="drupal new option"></p>
 <h3 id="testing-it-out-and-exploiting-the-xsw">Testing it out and exploiting the XSW</h3>
 <p>Clicking on the <code>authenticate with auth0</code> option should bring up the auth0 login page.</p>
-<p><img src="/notsosaml/image-32.png" alt="authenticate with auth0"></p>
-<p>And, once successful, it will return to our website with our new user.</p>
-<p><img src="/notsosaml/image-33.png" alt="login success"></p>
+<p><img src="/notsosaml/image-32.png" alt="authenticate with auth0">
+<img src="/notsosaml/image-33.png" alt="login success">
+And, once successful, it will return to our website with our new user.
+<img src="/notsosaml/image-34.png" alt="login success 2"></p>
 <p>By using a proxy like Burp Suite, it is possible to intercept the response from the Identity Server and analyze the SAML message that has been sent to the Relying Party:</p>
-<p><img src="/notsosaml/image-34.png" alt="intercepting requests with burp">
-And the decoded message:</p>
-<p><img src="/notsosaml/image-35.png" alt="decoded SAML message">
-At this point, all we have to do is to inject an additional <code>&lt;Assertion&gt;</code> element that will contain just the admin username as a <code>&lt;saml:NameID&gt;</code> inside a <code>&lt;saml:Subject&gt;</code> element. The rest of the element will be the same as the original one.</p>
-<p><img src="/notsosaml/image-36.png" alt="original one">
-<img src="/notsosaml/image-37.png" alt="original object">
+<p><img src="/notsosaml/image-35.png" alt="analyzing request with burp suite"></p>
+<p>And the decoded message:</p>
+<p><img src="/notsosaml/image-36.png" alt="original one"></p>
+<p>At this point, all we have to do is to inject an additional <code>&lt;Assertion&gt;</code> element that will contain just the admin username as a <code>&lt;saml:NameID&gt;</code> inside a <code>&lt;saml:Subject&gt;</code> element. The rest of the element will be the same as the original one.</p>
+<p><img src="/notsosaml/image-37.png" alt="original object">
 <img src="/notsosaml/image-38.png" alt="final object"></p>
 <p><strong>Note</strong>: this flaw could be also exploited by using the &ldquo;SAML Raider&rdquo; extension on burp suite, configured with the &ldquo;XSW 3&rdquo; payload.
 By sending the forged object, the following response should follow:</p>
 <p><img src="/notsosaml/image-39.png" alt="response after injecting the payload">
+<img src="/notsosaml/image-40.png" alt="redirect">
 And, finally, we&rsquo;ll get admin access.</p>
-<p><img src="/notsosaml/image-40.png" alt="admin access"></p>
+<p><img src="/notsosaml/image-41.png" alt="successful login"></p>
 <h2 id="spotting-the-bug">Spotting the bug</h2>
 <p>Spotting the vulnerability in the code is pretty trivial in this case. The request is hitting the miniorange_samlController.php and, afterwards, the MiniOrangeAcs.php#processSamlResponse method.</p>
-<p><img src="/notsosaml/image-41.png" alt="bugged file #1">
-<img src="/notsosaml/image-42.png" alt="bugged file #2"></p>
+<p><img src="/notsosaml/image-42.png" alt="bugged file #2">
+<img src="/notsosaml/image-43.png" alt="bugged file #3"></p>
 <p>Since the signature check could be bypassed (the green mark on the screenshot), the signature of our injected <Assertion> object isn&rsquo;t checked and the current() function will get only the first element of the array, which is the injected object, ignoring the other ones.</p>
 <p>Furthermore, the application doesn&rsquo;t enforce the <Assertion> signature and the x509 certificate.</p>
 <h2 id="conclusions">Conclusions</h2>

@@ -74,20 +74,22 @@ Once everything is ready, the following option should appear on the drupal site.
 Clicking on the `authenticate with auth0` option should bring up the auth0 login page.
 
 ![authenticate with auth0](/notsosaml/image-32.png)
-
-And, once successful, it will return to our website with our new user.
-
 ![login success](/notsosaml/image-33.png)
+And, once successful, it will return to our website with our new user.
+![login success 2](/notsosaml/image-34.png)
 
 By using a proxy like Burp Suite, it is possible to intercept the response from the Identity Server and analyze the SAML message that has been sent to the Relying Party:
 
-![intercepting requests with burp](/notsosaml/image-34.png)
+![analyzing request with burp suite](/notsosaml/image-35.png)
+
 And the decoded message:
 
-![decoded SAML message](/notsosaml/image-35.png)
-At this point, all we have to do is to inject an additional `<Assertion>` element that will contain just the admin username as a `<saml:NameID>` inside a `<saml:Subject>` element. The rest of the element will be the same as the original one.
 
 ![original one](/notsosaml/image-36.png)
+
+At this point, all we have to do is to inject an additional `<Assertion>` element that will contain just the admin username as a `<saml:NameID>` inside a `<saml:Subject>` element. The rest of the element will be the same as the original one.
+
+
 ![original object](/notsosaml/image-37.png)
 ![final object](/notsosaml/image-38.png)
 
@@ -95,15 +97,17 @@ At this point, all we have to do is to inject an additional `<Assertion>` elemen
 By sending the forged object, the following response should follow:
 
 ![response after injecting the payload](/notsosaml/image-39.png)
+![redirect](/notsosaml/image-40.png)
 And, finally, we'll get admin access.
 
-![admin access](/notsosaml/image-40.png)
 
+![successful login](/notsosaml/image-41.png)
 ## Spotting the bug
 Spotting the vulnerability in the code is pretty trivial in this case. The request is hitting the miniorange_samlController.php and, afterwards, the MiniOrangeAcs.php#processSamlResponse method.
 
-![bugged file #1](/notsosaml/image-41.png)
+
 ![bugged file #2](/notsosaml/image-42.png)
+![bugged file #3](/notsosaml/image-43.png)
 
 Since the signature check could be bypassed (the green mark on the screenshot), the signature of our injected <Assertion> object isn't checked and the current() function will get only the first element of the array, which is the injected object, ignoring the other ones.
 
