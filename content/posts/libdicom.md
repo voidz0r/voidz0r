@@ -289,7 +289,7 @@ Along with some helper functions like `find_by_hex` or `find_by_name` to look fo
 
 ![Building a DICOM file](/dicom/dicom_builder/02_building_dicomfile.png)
 
-I will upload the package to PyPi and you can install the package via `pip install -e dicombuilder .` after cloning it from ![Github](https://github.com/voidz0r/dicombuilder)
+I will upload the package to PyPi and you can install the package via `pip install -e dicombuilder .` after cloning it from [Github](https://github.com/voidz0r/dicombuilder)
 
 
 ## Impact

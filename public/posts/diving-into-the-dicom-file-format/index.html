@@ -169,7 +169,7 @@ if (!doNotTrack) {
 <meta itemprop="description" content="Introduction While doing some research about file formats, I occasionally found some references about the DICOM file format. Since I never heard about it I&rsquo;ve decided to dig deeper.
 16/02/2024 Update It seems that the developer was already aware of the Double-Free issue since it has been reported a few weeks ago and it&rsquo;s ready to be merged into the main branch. The issue has been reported in the following Github issue - Double Free and Github Issue - Floating point."><meta itemprop="datePublished" content="2024-02-06T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2024-02-06T00:00:00+00:00" />
-<meta itemprop="wordCount" content="2017"><meta itemprop="image" content="https://voidzone.me/logo/void.png">
+<meta itemprop="wordCount" content="2018"><meta itemprop="image" content="https://voidzone.me/logo/void.png">
 <meta itemprop="keywords" content="" />
   
   <meta name="twitter:card" content="summary_large_image"/>
@@ -550,7 +550,7 @@ if (!doNotTrack) {
 <p><img src="/dicom/dicom_builder/01_dicttable.png" alt="Dicombuilder dicttable"></p>
 <p>Along with some helper functions like <code>find_by_hex</code> or <code>find_by_name</code> to look for a specific element using the name, instead of the hex value. In the end, I was able to build a dicom file in the following way:</p>
 <p><img src="/dicom/dicom_builder/02_building_dicomfile.png" alt="Building a DICOM file"></p>
-<p>I will upload the package to PyPi and you can install the package via <code>pip install -e dicombuilder .</code> after cloning it from <img src="https://github.com/voidz0r/dicombuilder" alt="Github"></p>
+<p>I will upload the package to PyPi and you can install the package via <code>pip install -e dicombuilder .</code> after cloning it from <a href="https://github.com/voidz0r/dicombuilder">Github</a></p>
 <h2 id="impact">Impact</h2>
 <p>Controlling the flow of execution in this case will be pretty hard, because of the amount of memory mitigations in place. By the time of writing this, I was using glibc 2.35. Here are some techniques that are available:</p>
 <ul>
