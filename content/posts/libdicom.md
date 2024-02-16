@@ -289,7 +289,8 @@ Along with some helper functions like `find_by_hex` or `find_by_name` to look fo
 
 ![Building a DICOM file](/dicom/dicom_builder/02_building_dicomfile.png)
 
-I will upload the package to PyPi and you can install the package via `pip install dicombuilder`
+I will upload the package to PyPi and you can install the package via `pip install -e dicombuilder .` after cloning it from ![Github](https://github.com/voidz0r/dicombuilder)
+
 
 ## Impact
 Controlling the flow of execution in this case will be pretty hard, because of the amount of memory mitigations in place. By the time of writing this, I was using glibc 2.35. Here are some techniques that are available:
