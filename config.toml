@@ -25,7 +25,7 @@ theme = "paper"
 
   avatar = 'void@voidzone.it'
   name = "Cristian 'void' Giustini"
-  bio = 'l33t h4x0r'
+  bio = 'I pwn for a living.'
 # ------------------------------
 
 # needed to  render raw HTML (e.g. <sub>, <sup>, <kbd>, <mark>)

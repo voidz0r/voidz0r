@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>A tale research about the DICOM file format - Voidzone</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  <meta name="description" content="Introduction While doing some search about file formats, I occasionally found some references about the DICOM file format. Since I never heard about this particular format I&rsquo;ve decided to dig deeper into it.
+The format DICOM, acronym for Digital Imaging and Communications in Medicine, is both a communication protocol and a file format. As the name suggests, the format is widely used by a series of medical devices such as radiography, magnetic resonance imaging and radiation therapy." />
+  <meta name="author" content="Cristian &#39;void&#39; Giustini" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://voidzone.me/main.min.css" />
+
+  
+  <script
+    defer
+    src="https://voidzone.me/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+   
+  <link rel="preload" as="image" href="https://voidzone.me/theme.png" />
+
+  
+  
+  
+  <link rel="preload" as="image" href="https://www.gravatar.com/avatar/d4f904f245c1fd17d7f8fc7b662b7076?s=160&amp;d=identicon" />
+  
+  
+
+  
+  <link rel="preload" as="image" href="https://voidzone.me/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/github.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/linkedin.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/mastodon.svg" />
+  
+  <link rel="preload" as="image" href="https://voidzone.me/steam.svg" />
+  
+  
+
+  
+  
+
+  
+  <link rel="icon" href="https://voidzone.me/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://voidzone.me/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.115.4">
+
+  
+  
+
+  
+  
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-Z425PXG6E5', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z425PXG6E5"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-Z425PXG6E5', { 'anonymize_ip': false });
+}
+</script>
+
+  
+  <meta property="og:title" content="A tale research about the DICOM file format" />
+<meta property="og:description" content="Introduction While doing some search about file formats, I occasionally found some references about the DICOM file format. Since I never heard about this particular format I&rsquo;ve decided to dig deeper into it.
+The format DICOM, acronym for Digital Imaging and Communications in Medicine, is both a communication protocol and a file format. As the name suggests, the format is widely used by a series of medical devices such as radiography, magnetic resonance imaging and radiation therapy." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://voidzone.me/posts/dicom-file-format/" /><meta property="og:image" content="https://voidzone.me/logo/void.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-02-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-02-06T00:00:00+00:00" />
+
+  
+  <meta itemprop="name" content="A tale research about the DICOM file format">
+<meta itemprop="description" content="Introduction While doing some search about file formats, I occasionally found some references about the DICOM file format. Since I never heard about this particular format I&rsquo;ve decided to dig deeper into it.
+The format DICOM, acronym for Digital Imaging and Communications in Medicine, is both a communication protocol and a file format. As the name suggests, the format is widely used by a series of medical devices such as radiography, magnetic resonance imaging and radiation therapy."><meta itemprop="datePublished" content="2024-02-06T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2024-02-06T00:00:00+00:00" />
+<meta itemprop="wordCount" content="853"><meta itemprop="image" content="https://voidzone.me/logo/void.png">
+<meta itemprop="keywords" content="" />
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://voidzone.me/logo/void.png"/>
+
+<meta name="twitter:title" content="A tale research about the DICOM file format"/>
+<meta name="twitter:description" content="Introduction While doing some search about file formats, I occasionally found some references about the DICOM file format. Since I never heard about this particular format I&rsquo;ve decided to dig deeper into it.
+The format DICOM, acronym for Digital Imaging and Communications in Medicine, is both a communication protocol and a file format. As the name suggests, the format is widely used by a series of medical devices such as radiography, magnetic resonance imaging and radiation therapy."/>
+
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="https://voidzone.me/"
+      >Voidzone</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/voidz0r"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/voidz0r"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/voidde"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./mastodon.svg)"
+        href="https://infosec.exchange/@voidde"
+        target="_blank"
+        rel="me"
+      >
+        mastodon
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./steam.svg)"
+        href="https://steamcommunity.com/id/retvoid"
+        target="_blank"
+        rel="me"
+      >
+        steam
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">A tale research about the DICOM file format</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Feb 6, 2024</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="introduction">Introduction</h2>
+<p>While doing some search about file formats, I occasionally found some references about the DICOM file format. Since I never heard about this particular format I&rsquo;ve decided to dig deeper into it.</p>
+<h2 id="the-format">The format</h2>
+<p>DICOM, acronym for Digital Imaging and Communications in Medicine, is both a communication protocol and a file format. As the name suggests, the format is widely used by a series of medical devices such as radiography, magnetic resonance imaging and radiation therapy. The protocol itself has been release in 1985 by American College of Radiology (ACR) and National Electrical Manufacturers Association (NEMA).</p>
+<p>The main principle behind the format is to group information into data sets which will contain information about the patient such as his ID, first name and last name, and associated image(s).</p>
+<p>A typical DICOM file would look like the following:</p>
+<pre tabindex="0"><code>   Free text          Magic number
+┌──────────────┬──────────────────────┬─────────────────────┐
+│              │                      │                     │
+│    header    │   \x44\x49\x43\x4d   │    data elements    │
+│              │        &#34;DICM&#34;        │                     │
+│              │                      │                     │
+│              │                      │                     │
+│  1024 bits   │       4 bytes        │                     │
+└──────────────┴──────────────────────┴─────────────────────┘
+</code></pre><p>Each subsequent data element will have a Value Representation, which can be expressed as &ldquo;Implicit&rdquo; or &ldquo;Explicit&rdquo;, depending if the specific VR is supplied or not. Explicit VR needs to be represented differently depending on the VR.</p>
+<pre tabindex="0"><code>Data Element with explicit VR of AE, AS, AT, CS, DA, DS, DT, FL, FD, IS, LO, LT, PN, SH, SL, SS, ST, TM, UI, UL and US
+┌────────────────────────────────────┬──────────────────────┬────────────────┬─────────────────┐
+│               TAG                  │         VR           │   Value length │      Value      │
+├─────────────────┬──────────────────┼──────────────────────┼────────────────┼─────────────────┤
+│   group number  │  element number  │         VR           │     Length     │ Even number of  │
+│                 │                  │ Value Representation │                │ bytes encoded   │
+│                 │                  │                      │                │ according to VR │
+│     16 bits     │      16 bits     │       16 bits        │                │                 │
+│   unsigned int  │   unsigned int   │   2 byte character   │     16 bits    │                 │
+└─────────────────┴──────────────────┴──────────────────────┴────────────────┴─────────────────┘
+</code></pre><p>While when providing a different VR from the previous one, the Data element needs to be provided as following:</p>
+<pre tabindex="0"><code>Data Element with explicit VR other than the previous one
+┌────────────────────────────────────┬───────────────────────────────────┬─────────────────┬──────────────────┐
+│               TAG                  │                VR                 │   Value length  │       Value      │
+├─────────────────┬──────────────────┼─────────────────────┬─────────────┼─────────────────┼──────────────────┤
+│   group number  │  element number  │         VR          │  Reserved   │      Length     │ Even number of   │
+│                 │                  │ Value Representation│             │                 │ bytes encoded    │
+│                 │                  │                     │             │                 │ according to VR  │
+│     16 bits     │      16 bits     │       16 bits       │             │                 │                  │
+│   unsigned int  │   unsigned int   │   2 byte character  │  16 bits    │     32 bits     │                  │
+└─────────────────┴──────────────────┴─────────────────────┴─────────────┴─────────────────┴──────────────────┘
+</code></pre><p>Each VR will represent a different type of data like, for instance:</p>
+<ul>
+<li>AE - max 16 bytes - Application Entity</li>
+<li>AS - 4 bytes - Age string</li>
+<li>AT - 4 bytes - Attribute</li>
+<li>DA - 8 bytes - The date expressed as YYYYMMDD</li>
+</ul>
+<p>And so on. All the VRs can be found in the official <a href="https://dicom.nema.org/medical/dicom/current/output/html/part05.html#table_6.2-1">DICOM Standard</a> document.</p>
+<p>Here is a valid DICOM file viewed with the <code>xxd</code> tool:</p>
+<p><img src="/dicom/01_xxd.png" alt="DICOM file"></p>
+<h2 id="fuzzing-the-libdicom-library">Fuzzing the libdicom library</h2>
+<p>One of the many libraries that parse .dcm files is the <code>libdicom</code> library, which can be found on <a href="https://github.com/ImagingDataCommons/libdicom">Github</a>.</p>
+<p>While the library uses the <code>meson</code> tool in order to build the project, AFL doesn&rsquo;t seems to be compatible with it. I converted the .ninja files using a tool called <code>ninjatool</code> which generates a Makefile from a ninja one. It is availabe on Github as well <a href="https://github.com/bonzini/qemu/blob/meson-poc/scripts/ninjatool.py">ninjatool.py</a>.</p>
+<p>In order to fuzz the library we need an entry point for the fuzzer, which takes an input file (or stdin) and pass it to the libdicom library. The example on the official github page can be used:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;dicom/dicom.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;dicom/dicom.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>argv[]) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>file_path <span style="color:#f92672">=</span> argv[<span style="color:#ae81ff">1</span>]; <span style="color:#75715e">// We use argv1 as input filename, instead of having an hardcoded value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    DcmError <span style="color:#f92672">*</span>error <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    DcmFilehandle <span style="color:#f92672">*</span>filehandle <span style="color:#f92672">=</span> <span style="color:#a6e22e">dcm_filehandle_create_from_file</span>(<span style="color:#f92672">&amp;</span>error, file_path);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (filehandle <span style="color:#f92672">==</span> NULL) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">dcm_error_log</span>(error);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">dcm_error_clear</span>(<span style="color:#f92672">&amp;</span>error);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> DcmDataSet <span style="color:#f92672">*</span>metadata <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">dcm_filehandle_get_metadata_subset</span>(<span style="color:#f92672">&amp;</span>error, filehandle);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (metadata <span style="color:#f92672">==</span> NULL) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">dcm_error_log</span>(error);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">dcm_error_clear</span>(<span style="color:#f92672">&amp;</span>error);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">dcm_filehandle_destroy</span>(filehandle);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>num_frames;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">uint32_t</span> tag <span style="color:#f92672">=</span> <span style="color:#a6e22e">dcm_dict_tag_from_keyword</span>(<span style="color:#e6db74">&#34;NumberOfFrames&#34;</span>);
+</span></span><span style="display:flex;"><span>    DcmElement <span style="color:#f92672">*</span>element <span style="color:#f92672">=</span> <span style="color:#a6e22e">dcm_dataset_get</span>(<span style="color:#f92672">&amp;</span>error, metadata, tag);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (element <span style="color:#f92672">==</span> NULL <span style="color:#f92672">||</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">!</span><span style="color:#a6e22e">dcm_element_get_value_string</span>(<span style="color:#f92672">&amp;</span>error, element, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">&amp;</span>num_frames)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">dcm_error_log</span>(error);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">dcm_error_clear</span>(<span style="color:#f92672">&amp;</span>error);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">dcm_filehandle_destroy</span>(filehandle);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;NumerOfFrames == %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, num_frames);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">dcm_filehandle_destroy</span>(filehandle);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>After taking a .DCM file on the internet, I was happy to see that a lot of crashes showed up on AFL.</p>
+<h2 id="crash-1---floating-point-exception">Crash 1 - Floating point exception</h2>
+<p>The first crash was regarding a floating point exception and it&rsquo;s regarding the <code>get_tiles</code> function of the <code>dicom-file.c</code> file.</p>
+<p><img src="/static/dicom/02_floating_point_exception.png" alt="Floating Point Exception"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">get_tiles</span>(DcmError <span style="color:#f92672">**</span>error,
+</span></span><span style="display:flex;"><span>                      <span style="color:#66d9ef">const</span> DcmDataSet <span style="color:#f92672">*</span>metadata,
+</span></span><span style="display:flex;"><span>                      <span style="color:#66d9ef">uint32_t</span> <span style="color:#f92672">*</span>tiles_across,
+</span></span><span style="display:flex;"><span>                      <span style="color:#66d9ef">uint32_t</span> <span style="color:#f92672">*</span>tiles_down)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int64_t</span> width;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int64_t</span> height;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">uint32_t</span> frame_width;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">uint32_t</span> frame_height;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">get_frame_size</span>(error, metadata, <span style="color:#f92672">&amp;</span>frame_width, <span style="color:#f92672">&amp;</span>frame_height)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// TotalPixelMatrixColumns is optional and defaults to Columns, ie. one
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// frame across
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    width <span style="color:#f92672">=</span> frame_width;
+</span></span><span style="display:flex;"><span>    (<span style="color:#66d9ef">void</span>) <span style="color:#a6e22e">get_tag_int</span>(NULL, metadata, <span style="color:#e6db74">&#34;TotalPixelMatrixColumns&#34;</span>, <span style="color:#f92672">&amp;</span>width); <span style="color:#75715e">// &lt;--- crash here
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// TotalPixelMatrixColumns is optional and defaults to Columns, ie. one
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// frame across
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    height <span style="color:#f92672">=</span> frame_width;
+</span></span><span style="display:flex;"><span>    (<span style="color:#66d9ef">void</span>) <span style="color:#a6e22e">get_tag_int</span>(NULL, metadata, <span style="color:#e6db74">&#34;TotalPixelMatrixRows&#34;</span>, <span style="color:#f92672">&amp;</span>height);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">*</span>tiles_across <span style="color:#f92672">=</span> (<span style="color:#66d9ef">uint32_t</span>) width <span style="color:#f92672">/</span> frame_width <span style="color:#f92672">+</span> <span style="color:#f92672">!!</span>(width <span style="color:#f92672">%</span> frame_width);
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">*</span>tiles_down <span style="color:#f92672">=</span> (<span style="color:#66d9ef">uint32_t</span>) height <span style="color:#f92672">/</span> frame_height <span style="color:#f92672">+</span> <span style="color:#f92672">!!</span>(height <span style="color:#f92672">%</span> frame_height);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></section>
+
+  
+  
+
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://voidzone.me/posts/a-phishing-attempt-on-steam-that-became-qrljacking/"
+      ><span class="mr-1.5">←</span><span>A phishing attempt on Steam that became a Qrljacking research</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://voidzone.me/posts/cve-2022-44268-imagemagick-arbitrary-file-read/"
+      ><span>CVE-2022-44268 - Proof Of Concept of the ImageMagick Arbitrary File Read vulnerability</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="https://voidzone.me/">Voidzone</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

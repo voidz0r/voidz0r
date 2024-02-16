@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Copyright © 2023, Cristian &#39;void&#39;; all rights reserved.</copyright>
-    <lastBuildDate>Fri, 11 Aug 2023 13:59:55 +0200</lastBuildDate><atom:link href="https://voidzone.me/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://voidzone.me/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A phishing attempt on Steam that became a Qrljacking research</title>
       <link>https://voidzone.me/posts/a-phishing-attempt-on-steam-that-became-qrljacking/</link>
@@ -17,6 +17,16 @@
       <description>Preface This is a brief story about a phishing attempt made by a user that turned out into a little research.
 The initial contact The first contact I had was with a profile named Abigail🌻 who sent me a friend invite on steam.
 After a few minutes I received a message from the user, asking for a vote on a specific CS:GO AK-47 skin. Unfortunately I didn&amp;rsquo;t take screenshot of the conversation because I got blocked and the messages are gone.</description>
+    </item>
+    
+    <item>
+      <title>Diving into the DICOM file format</title>
+      <link>https://voidzone.me/posts/diving-into-the-dicom-file-format/</link>
+      <pubDate>Tue, 06 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://voidzone.me/posts/diving-into-the-dicom-file-format/</guid>
+      <description>Introduction While doing some research about file formats, I occasionally found some references about the DICOM file format. Since I never heard about it I&amp;rsquo;ve decided to dig deeper.
+16/02/2024 Update It seems that the developer was already aware of the Double-Free issue since it has been reported a few weeks ago and it&amp;rsquo;s ready to be merged into the main branch. The issue has been reported in the following Github issue - Double Free and Github Issue - Floating point.</description>
     </item>
     
     <item>
