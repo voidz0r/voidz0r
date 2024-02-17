@@ -317,7 +317,7 @@ Controlling the flow of execution in this case will be pretty hard, because of t
 
 All the above methodologies require to have a precise control about what needs to be free'd and in which order. Giving our scenario:
 - We don't have control on the size. The majority of the allocations are handled in a precise way and even if we force a specific length, there are some additional checks made on each VR and pre-defined sizes
-- We don't have control of the `free`/`malloc` order. The application parse the entire file in a top-down flow, starting from allocating memory regions while reading the data elements to free the memory at the end. With this in mind it's trivial, if not impossible, to force a specific `free` and `malloc` sequence.
+- We don't have control of the `free`/`malloc` order. The application parse the entire file in a top-down flow, starting from allocating memory regions while reading the data elements and freeing the memory at the end. With this in mind it's trivial, if not impossible, to force a specific `free` and `malloc` sequence.
 
 So the result will be just a crash.
 

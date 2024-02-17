@@ -577,7 +577,7 @@ if (!doNotTrack) {
 <p>All the above methodologies require to have a precise control about what needs to be free&rsquo;d and in which order. Giving our scenario:</p>
 <ul>
 <li>We don&rsquo;t have control on the size. The majority of the allocations are handled in a precise way and even if we force a specific length, there are some additional checks made on each VR and pre-defined sizes</li>
-<li>We don&rsquo;t have control of the <code>free</code>/<code>malloc</code> order. The application parse the entire file in a top-down flow, starting from allocating memory regions while reading the data elements to free the memory at the end. With this in mind it&rsquo;s trivial, if not impossible, to force a specific <code>free</code> and <code>malloc</code> sequence.</li>
+<li>We don&rsquo;t have control of the <code>free</code>/<code>malloc</code> order. The application parse the entire file in a top-down flow, starting from allocating memory regions while reading the data elements and freeing the memory at the end. With this in mind it&rsquo;s trivial, if not impossible, to force a specific <code>free</code> and <code>malloc</code> sequence.</li>
 </ul>
 <p>So the result will be just a crash.</p>
 <h1 id="related-impact">Related impact</h1>
