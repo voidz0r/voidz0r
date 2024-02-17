@@ -15,7 +15,7 @@ It seems that the developer was already aware of the Double-Free issue since it 
 ## The format
 DICOM, acronym for Digital Imaging and Communications in Medicine, is both a communication protocol and a file format. As the name suggests, the format is widely used by a series of medical devices such as radiography, magnetic resonance imaging and radiation therapy. The protocol itself has been release in 1985 by American College of Radiology (ACR) and National Electrical Manufacturers Association (NEMA). The communication part of the protocol was already covered by Sina Yazdanmehr during Black Hat 2023. Following the link to [his research](https://i.blackhat.com/EU-23/Presentations/EU-23-Yazdanmehr-Millions_of_Patient_Records_at_Risk.pdf)
 
-The main principle behind the format is to group information into data sets which will contain information about the patient such as his ID, first name and last name, and associated image(s). The file format also acts like an encapsulator since it supports several other standards such as JPEG, GIF, PNG and so on.
+The main principle behind the format is to group information into data sets and each dataset will represent the data about the patient such as his ID, first name and last name, and associated image(s). The file format also acts like an encapsulator since it supports several other standards such as JPEG, GIF, PNG and so on.
 
 A typical DICOM file would look like the following:
 ```
@@ -268,7 +268,7 @@ We can clearly see that data is hitting the `dcm_dataset_insert` first before be
 
 If we follow the functions in the source code we see:
 
-![Crash - Sequences - Root cause #2](/dicom/dfree_sequences/05_firstfree.png)
+![Crash - Sequences - Root cause #2](/dicom/dfree_sequences/05_rootcause_firstfree.png)
 
 ![Crash - Sequences - Root cause #1](/dicom/dfree_sequences/04_rootcause.png)
 

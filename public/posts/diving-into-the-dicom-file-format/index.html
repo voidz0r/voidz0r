@@ -169,7 +169,7 @@ if (!doNotTrack) {
 <meta itemprop="description" content="Introduction While doing some research about file formats, I occasionally found some references about the DICOM file format. Since I never heard about it I&rsquo;ve decided to dig deeper.
 16/02/2024 Update It seems that the developer was already aware of the Double-Free issue since it has been reported a few weeks ago and it&rsquo;s ready to be merged into the main branch. The issue has been reported in the following Github issue - Double Free and Github Issue - Floating point."><meta itemprop="datePublished" content="2024-02-06T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2024-02-06T00:00:00+00:00" />
-<meta itemprop="wordCount" content="2018"><meta itemprop="image" content="https://voidzone.me/logo/void.png">
+<meta itemprop="wordCount" content="2021"><meta itemprop="image" content="https://voidzone.me/logo/void.png">
 <meta itemprop="keywords" content="" />
   
   <meta name="twitter:card" content="summary_large_image"/>
@@ -352,7 +352,7 @@ if (!doNotTrack) {
 <p>It seems that the developer was already aware of the Double-Free issue since it has been reported a few weeks ago and it&rsquo;s ready to be merged into the main branch. The issue has been reported in the following <a href="https://github.com/ImagingDataCommons/libdicom/issues/82">Github issue - Double Free</a> and <a href="https://github.com/ImagingDataCommons/libdicom/issues/83">Github Issue - Floating point</a>.</p>
 <h2 id="the-format">The format</h2>
 <p>DICOM, acronym for Digital Imaging and Communications in Medicine, is both a communication protocol and a file format. As the name suggests, the format is widely used by a series of medical devices such as radiography, magnetic resonance imaging and radiation therapy. The protocol itself has been release in 1985 by American College of Radiology (ACR) and National Electrical Manufacturers Association (NEMA). The communication part of the protocol was already covered by Sina Yazdanmehr during Black Hat 2023. Following the link to <a href="https://i.blackhat.com/EU-23/Presentations/EU-23-Yazdanmehr-Millions_of_Patient_Records_at_Risk.pdf">his research</a></p>
-<p>The main principle behind the format is to group information into data sets which will contain information about the patient such as his ID, first name and last name, and associated image(s). The file format also acts like an encapsulator since it supports several other standards such as JPEG, GIF, PNG and so on.</p>
+<p>The main principle behind the format is to group information into data sets and each dataset will represent the data about the patient such as his ID, first name and last name, and associated image(s). The file format also acts like an encapsulator since it supports several other standards such as JPEG, GIF, PNG and so on.</p>
 <p>A typical DICOM file would look like the following:</p>
 <pre tabindex="0"><code>   Free text          Magic number
 ┌──────────────┬──────────────────────┬─────────────────────┐
@@ -536,7 +536,7 @@ if (!doNotTrack) {
 <p><img src="/dicom/dfree_sequences/03_second_free.png" alt="Crash - Sequences - Breakpoint hit #2"></p>
 <p>We can clearly see that data is hitting the <code>dcm_dataset_insert</code> first before beying free&rsquo;d on the <code>dcm_sequence_destroy</code> function. Subsequentially, another <code>dcm_sequence_destroy</code> is getting triggered, this time from the <code>parse_meta_sequence_end</code> function.</p>
 <p>If we follow the functions in the source code we see:</p>
-<p><img src="/dicom/dfree_sequences/05_firstfree.png" alt="Crash - Sequences - Root cause #2"></p>
+<p><img src="/dicom/dfree_sequences/05_rootcause_firstfree.png" alt="Crash - Sequences - Root cause #2"></p>
 <p><img src="/dicom/dfree_sequences/04_rootcause.png" alt="Crash - Sequences - Root cause #1"></p>
 <p>If we look at the screenshots above we can understand why this is happening:</p>
 <ul>
