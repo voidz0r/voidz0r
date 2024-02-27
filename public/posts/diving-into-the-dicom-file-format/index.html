@@ -69,8 +69,8 @@
   
   
   
-  <meta name="description" content="Introduction While doing some research about file formats, I occasionally found some references about the DICOM file format. Since I never heard about it I&rsquo;ve decided to dig deeper and I found two vulnerabilities, a Floating Point Exception and a Double Free. This is an in-depth analysis of the vulnerability, the root causes and some explanation about the file format.
-16/02/2024 Update It seems that the developer was already aware of the Double-Free issue since it has been reported a few weeks ago and it&rsquo;s ready to be merged into the main branch." />
+  <meta name="description" content="Introduction While doing some research about file formats, I occasionally found some references about the DICOM file format. Since I never heard about it I&rsquo;ve decided to dig deeper.
+16/02/2024 Update It seems that the developer was already aware of the Double-Free issue since it has been reported a few weeks ago and it&rsquo;s ready to be merged into the main branch. The issue has been reported in the following Github issue - Double Free and Github Issue - Floating point." />
   <meta name="author" content="Cristian &#39;void&#39; Giustini" />
   
 
@@ -157,8 +157,8 @@ if (!doNotTrack) {
 
   
   <meta property="og:title" content="Diving into the DICOM file format" />
-<meta property="og:description" content="Introduction While doing some research about file formats, I occasionally found some references about the DICOM file format. Since I never heard about it I&rsquo;ve decided to dig deeper and I found two vulnerabilities, a Floating Point Exception and a Double Free. This is an in-depth analysis of the vulnerability, the root causes and some explanation about the file format.
-16/02/2024 Update It seems that the developer was already aware of the Double-Free issue since it has been reported a few weeks ago and it&rsquo;s ready to be merged into the main branch." />
+<meta property="og:description" content="Introduction While doing some research about file formats, I occasionally found some references about the DICOM file format. Since I never heard about it I&rsquo;ve decided to dig deeper.
+16/02/2024 Update It seems that the developer was already aware of the Double-Free issue since it has been reported a few weeks ago and it&rsquo;s ready to be merged into the main branch. The issue has been reported in the following Github issue - Double Free and Github Issue - Floating point." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://voidzone.me/posts/diving-into-the-dicom-file-format/" /><meta property="og:image" content="https://voidzone.me/logo/void.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-06T00:00:00+00:00" />
@@ -166,18 +166,18 @@ if (!doNotTrack) {
 
   
   <meta itemprop="name" content="Diving into the DICOM file format">
-<meta itemprop="description" content="Introduction While doing some research about file formats, I occasionally found some references about the DICOM file format. Since I never heard about it I&rsquo;ve decided to dig deeper and I found two vulnerabilities, a Floating Point Exception and a Double Free. This is an in-depth analysis of the vulnerability, the root causes and some explanation about the file format.
-16/02/2024 Update It seems that the developer was already aware of the Double-Free issue since it has been reported a few weeks ago and it&rsquo;s ready to be merged into the main branch."><meta itemprop="datePublished" content="2024-02-06T00:00:00+00:00" />
+<meta itemprop="description" content="Introduction While doing some research about file formats, I occasionally found some references about the DICOM file format. Since I never heard about it I&rsquo;ve decided to dig deeper.
+16/02/2024 Update It seems that the developer was already aware of the Double-Free issue since it has been reported a few weeks ago and it&rsquo;s ready to be merged into the main branch. The issue has been reported in the following Github issue - Double Free and Github Issue - Floating point."><meta itemprop="datePublished" content="2024-02-06T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2024-02-06T00:00:00+00:00" />
-<meta itemprop="wordCount" content="2052"><meta itemprop="image" content="https://voidzone.me/logo/void.png">
+<meta itemprop="wordCount" content="2021"><meta itemprop="image" content="https://voidzone.me/logo/void.png">
 <meta itemprop="keywords" content="" />
   
   <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://voidzone.me/logo/void.png"/>
 
 <meta name="twitter:title" content="Diving into the DICOM file format"/>
-<meta name="twitter:description" content="Introduction While doing some research about file formats, I occasionally found some references about the DICOM file format. Since I never heard about it I&rsquo;ve decided to dig deeper and I found two vulnerabilities, a Floating Point Exception and a Double Free. This is an in-depth analysis of the vulnerability, the root causes and some explanation about the file format.
-16/02/2024 Update It seems that the developer was already aware of the Double-Free issue since it has been reported a few weeks ago and it&rsquo;s ready to be merged into the main branch."/>
+<meta name="twitter:description" content="Introduction While doing some research about file formats, I occasionally found some references about the DICOM file format. Since I never heard about it I&rsquo;ve decided to dig deeper.
+16/02/2024 Update It seems that the developer was already aware of the Double-Free issue since it has been reported a few weeks ago and it&rsquo;s ready to be merged into the main branch. The issue has been reported in the following Github issue - Double Free and Github Issue - Floating point."/>
 
   
   
@@ -347,7 +347,7 @@ if (!doNotTrack) {
   </header>
 
   <section><h2 id="introduction">Introduction</h2>
-<p>While doing some research about file formats, I occasionally found some references about the DICOM file format. Since I never heard about it I&rsquo;ve decided to dig deeper and I found two vulnerabilities, a Floating Point Exception and a Double Free. This is an in-depth analysis of the vulnerability, the root causes and some explanation about the file format.</p>
+<p>While doing some research about file formats, I occasionally found some references about the DICOM file format. Since I never heard about it I&rsquo;ve decided to dig deeper.</p>
 <h3 id="16022024-update">16/02/2024 Update</h3>
 <p>It seems that the developer was already aware of the Double-Free issue since it has been reported a few weeks ago and it&rsquo;s ready to be merged into the main branch. The issue has been reported in the following <a href="https://github.com/ImagingDataCommons/libdicom/issues/82">Github issue - Double Free</a> and <a href="https://github.com/ImagingDataCommons/libdicom/issues/83">Github Issue - Floating point</a>.</p>
 <h2 id="the-format">The format</h2>

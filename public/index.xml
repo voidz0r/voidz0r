@@ -25,8 +25,8 @@ After a few minutes I received a message from the user, asking for a vote on a s
       <pubDate>Tue, 06 Feb 2024 00:00:00 +0000</pubDate>
       
       <guid>https://voidzone.me/posts/diving-into-the-dicom-file-format/</guid>
-      <description>Introduction While doing some research about file formats, I occasionally found some references about the DICOM file format. Since I never heard about it I&amp;rsquo;ve decided to dig deeper and I found two vulnerabilities, a Floating Point Exception and a Double Free. This is an in-depth analysis of the vulnerability, the root causes and some explanation about the file format.
-16/02/2024 Update It seems that the developer was already aware of the Double-Free issue since it has been reported a few weeks ago and it&amp;rsquo;s ready to be merged into the main branch.</description>
+      <description>Introduction While doing some research about file formats, I occasionally found some references about the DICOM file format. Since I never heard about it I&amp;rsquo;ve decided to dig deeper.
+16/02/2024 Update It seems that the developer was already aware of the Double-Free issue since it has been reported a few weeks ago and it&amp;rsquo;s ready to be merged into the main branch. The issue has been reported in the following Github issue - Double Free and Github Issue - Floating point.</description>
     </item>
     
     <item>

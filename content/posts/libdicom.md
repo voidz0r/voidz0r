@@ -7,7 +7,7 @@ images: ["logo/void.png"]
 ---
 
 ## Introduction
-While doing some research about file formats, I occasionally found some references about the DICOM file format. Since I never heard about it I've decided to dig deeper and I found two vulnerabilities, a Floating Point Exception and a Double Free. This is an in-depth analysis of the vulnerability, the root causes and some explanation about the file format.
+While doing some research about file formats, I occasionally found some references about the DICOM file format. Since I never heard about it I've decided to dig deeper.
 
 ### 16/02/2024 Update
 It seems that the developer was already aware of the Double-Free issue since it has been reported a few weeks ago and it's ready to be merged into the main branch. The issue has been reported in the following [Github issue - Double Free](https://github.com/ImagingDataCommons/libdicom/issues/82) and [Github Issue - Floating point](https://github.com/ImagingDataCommons/libdicom/issues/83).
