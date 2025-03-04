@@ -17,7 +17,6 @@ theme = "paper"
 [params]
   color = 'linen'
 
-  twitter = "voidz0r"
   github = "voidz0r"
   linkedin = "voidde"
   mastodon = "https://mastodon.bar/@void"
@@ -53,11 +52,6 @@ series = "series"
     disabled = false
     simple = true
 
-  [privacy.twitter]
-    disabled = true
-    enableDNT = true
-    simple = true
-
   [privacy.instagram]
     disabled = false
     simple = true
@@ -69,7 +63,4 @@ series = "series"
 [services]
 
   [services.instagram]
-    disableInlineCSS = true
-
-  [services.twitter]
     disableInlineCSS = true
