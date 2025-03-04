@@ -54,7 +54,7 @@ series = "series"
     simple = true
 
   [privacy.twitter]
-    disabled = false
+    disabled = true
     enableDNT = true
     simple = true
 
