@@ -183,7 +183,7 @@ static bool get_tiles(DcmError **error,
 }
 ```
 
-Putting a breakpoint on line `152` shows that width and height are actually zero, so the exception is because the value pointed by `tiles_across` is dividing zero by zero.
+Putting a breakpoint on line `152` shows that width and height are actually zero, so the exception cause is a division of zero by zero on the value pointed by `tiles_across`.
 
 ![GDB Breakpoint](/dicom/fp1/03_breakpoint.png)
 
@@ -221,7 +221,7 @@ This one looked way more interesting from an exploitation point of view.
 
 ![Segfault](/dicom/dfree/05_segfault.png)
 
-By looking at the debug messages, which can be activated by using the `DCM_DEBUG=1` env variable, it is obvious that the library tried to `free` a specific value twice, first on tag `0200 3030` and then on some address on the heap.
+By looking at the debug messages, which can be activated by using the `DCM_DEBUG=1` env variable, it is obvious that the library tries to `free` a specific value twice, first on tag `0200 3030` and then on some address on the heap.
 
 Inspecting the crash with gdb shows:
 
@@ -232,12 +232,12 @@ So the library, for some reason, calls the `dcm_element_destroy` function twice.
 ![Break #1](/dicom/dfree/08_first_break.png)
 ![Break #2](/dicom/dfree/09_second_break.png)
 
-A look at the source code shows this:
+A look at the source code shows:
 
 ![First free](/dicom/dfree/10_firstfree.png)
 ![Second free](/dicom/dfree/11_secondfree.png)
 
-So this means that whenever there are duplicated tags into the the DCM body, the `dcm_dataset_insert` fails, `free` the element and returns false. In the `parse_meta_element_create` there will be another `free` because of that boolean result, which is causing the double free. But what the message `free(): double free detected in tcache 2` means?
+This means that whenever there are duplicated tags into the DCM body, the `dcm_dataset_insert` fails, `free` the element and returns false. In the `parse_meta_element_create` there will be another `free` because of that boolean result, which is causing the double free. But what does the message `free(): double free detected in tcache 2` even mean?
 
 The message shows that the glibc protection against double free got triggered and prevented to double free the memory chunk. The tcache is a heap caching mechanism introduced from the glibc 2.26 back in 2017 and it offers some performance gains by creating per-thread caches for chunks up to a certain size. This means that it will first look into the tcache bins before traversing small, fast, large or unsorted bins, whenever a chunk is allocated or freed.
 
@@ -264,7 +264,7 @@ And putting some breakpoints:
 
 ![Crash - Sequences - Breakpoint hit #2](/dicom/dfree_sequences/03_second_free.png)
 
-We can clearly see that data is hitting the `dcm_dataset_insert` first before beying free'd on the `dcm_sequence_destroy` function. Subsequentially, another `dcm_sequence_destroy` is getting triggered, this time from the `parse_meta_sequence_end` function.
+We can clearly see that data is hitting the `dcm_dataset_insert` first before being free'd on the `dcm_sequence_destroy` function. Subsequentially, another `dcm_sequence_destroy` is getting triggered, this time from the `parse_meta_sequence_end` function.
 
 If we follow the functions in the source code we see:
 
@@ -279,17 +279,15 @@ If we look at the screenshots above we can understand why this is happening:
 Until now we used what AFL generated from the input files, but how we can control each element and build our own DCM file?
 
 ## DCM Builder in the building!
-While there are some libraries that parse .dcm files, like `pydicom`, I had the necessity for a tool that builds arbitrary data elements and force the library to load sequence of data in a specific order. So I've built the `dicombuilder` library.
+While there are some libraries that are able to parse .dcm files, like `pydicom`, I needed a tool that builds arbitrary data elements and forces the library to load sequence of data in a specific order. So I've built the `dicombuilder` library.
 
-The library is pretty simple, it uses a dictionary of all the possible values, declared in the `dicttable.py` file like the following:
+The library is pretty straight forward as it uses a dictionary of all the possible values, declared in the `dicttable.py` file like the following:
 
 ![Dicombuilder dicttable](/dicom/dicom_builder/01_dicttable.png)
 
 Along with some helper functions like `find_by_hex` or `find_by_name` to look for a specific element using the name, instead of the hex value. In the end, I was able to build a dicom file in the following way:
 
 ![Building a DICOM file](/dicom/dicom_builder/02_building_dicomfile.png)
-
-I will upload the package to PyPi and you can install the package via `pip install -e dicombuilder .` after cloning it from [Github](https://github.com/voidz0r/dicombuilder)
 
 
 ## Impact
