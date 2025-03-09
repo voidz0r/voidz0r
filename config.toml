@@ -1,6 +1,6 @@
 baseURL = "https://voidzone.me/"
 title = "Voidzone"
-author = "Cristian 'void' Giustini"
+author = "Cristian 'void' G."
 copyright = "Copyright © 2023, Cristian 'void'; all rights reserved."
 paginate = 5
 languageCode = "en"
